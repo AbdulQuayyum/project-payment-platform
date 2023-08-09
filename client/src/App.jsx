@@ -1,8 +1,12 @@
 import React from 'react'
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
   return (
-    <div>App</div>
+    <>
+      <Toaster />
+      App
+    </>
   )
 }
 
