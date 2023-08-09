@@ -82,6 +82,11 @@ const Login = () => {
                         </button>
                     </div>
                 </div>
+                <div className='flex w-full my-4'>
+                    <button className='w-full px-8 py-3 text-sm text-white transition-all bg-black border border-black rounded-full hover:bg-white hover:text-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white'>
+                        Login
+                    </button>
+                </div>
                 <div className='flex justify-end mt-4'>
                     <Link to='/Register'>
                         <span className='text-[#aaa] hover:text-[#000]'>Create an Account</span>
