@@ -38,7 +38,7 @@ const UserProfile = () => {
                             style={{ color: item?.iconColor, backgroundColor: item?.iconBg }}
                             className="p-3 text-xl rounded-lg hover:bg-light-gray"
                         >
-                            {item?.icon}
+                            {item.icon}
                         </button>
 
                         <div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { HiSpeakerWave } from "react-icons/hi"
+import { HiSpeakerWave } from "react-icons/hi2"
 import { FaRegUser } from "react-icons/fa"
 import { TbSettings } from "react-icons/tb";
 
@@ -26,13 +26,13 @@ export const NotficationData = [
 
 export const UserProfileData = [
     {
-        icon: <FaRegUser />,
+        icon: FaRegUser,
         title: "My Profile",
         iconColor: "#aaa",
         iconBg: "#e5e7eb",
     },
     {
-        icon: <TbSettings />,
+        icon: TbSettings,
         title: "Settings",
         iconColor: "#aaa",
         iconBg: "#e5e7eb",
