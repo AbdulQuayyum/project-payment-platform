@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { Toggler } from "../Theme/Index"
+import { Toggler } from "../../Theme/Index"
 import Logo from "/logo.png"
 
 const Navbar = () => {
