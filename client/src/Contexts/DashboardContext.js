@@ -28,4 +28,4 @@ export const DashboardProvider = ({ children }) => {
     );
 };
 
-export const useStateContext = () => useContext(DashbaordContext);
+export const UseStateContext = () => useContext(DashbaordContext);

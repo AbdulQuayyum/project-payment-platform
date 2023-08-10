@@ -2,7 +2,6 @@ import React from 'react';
 import { TbX } from 'react-icons/tb';
 import { FaRegUser } from "react-icons/fa"
 
-import User from "../../../Assets/Images/Components/patient-7.png"
 import Button from './Button';
 import { UserProfileData } from '../../../Data/Dummy';
 

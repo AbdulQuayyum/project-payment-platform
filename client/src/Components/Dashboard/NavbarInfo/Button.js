@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { useStateContext } from '../../../Contexts/DashboardContext';
+import { UseStateContext } from '../../../Contexts/DashboardContext';
 
 const Button = ({ icon, bgColor, color, bgHoverColor, size, text, borderRadius, width }) => {
-    const { setIsClicked, initialState } = useStateContext();
+    const { setIsClicked, initialState } = UseStateContext();
 
     return (
         <button
