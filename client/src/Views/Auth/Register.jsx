@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Select from 'react-select'
 
 import AuthLayout from '../../Layouts/Auth.Layout'
+import CountryRawData from "../../Data/Country.json"
+import IDRawData from "../../Data/IdType.json"
 
 const Register = () => {
     const [firstName, setFirstName] = useState("")
@@ -10,6 +12,7 @@ const Register = () => {
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
     const [address, setAddress] = useState("")
+    const [identityNumber, setIdentityNumber] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -18,6 +21,51 @@ const Register = () => {
     const [IdTypeData, setIdTypeData] = useState([])
     const [country, setCountry] = useState(null);
     const [IdType, setIdType] = useState(null)
+
+    useEffect(() => {
+        var count = Object.keys(CountryRawData).length;
+        let countryArray = [];
+        for (var i = 0; i < count; i++) {
+            countryArray.push({
+                value: CountryRawData[i].country_code,
+                label: CountryRawData[i].country_name,
+            });
+        }
+        setCountryData(countryArray);
+    }, [])
+
+    const FetchIdTypes = (countryCode) => {
+        // Filter the data array based on the countryCode
+        const filteredIdTypes = IDRawData.filter(item => item.country_code === countryCode);
+
+        // Map the filtered results to get an array of objects with label and value properties
+        const idTypes = filteredIdTypes.map(item => ({
+            label: item.id_type.replace(/_/g, ' '), // Replace underscores with spaces
+            value: item.id_type
+        }));
+
+        // Set the IdTypeData state with the filtered ID types
+        setIdTypeData(idTypes);
+
+    }
+
+    const HandleLoadIdData = (countryCode) => {
+        FetchIdTypes(countryCode);
+    }
+
+    const customStyles = {
+        control: (provided) => ({
+            ...provided,
+            cursor: "pointer",
+            color: "#e5e7eb",
+            background: 'transparent',
+            borderColor: "#e5e7eb",
+            borderWidth: "2px",
+            borderRadius: "12px",
+            minHeight: '48px',
+            padding: "0px 2px"
+        })
+    };
 
     function TogglePasswordVisibility() {
         setIsPasswordVisible((prevState) => !prevState);
@@ -80,8 +128,65 @@ const Register = () => {
                 </div>
                 <div className='flex-col flex sm:grid sm:grid-cols-2 gap-x-6'>
                     <div className='my-4'>
+                        <label
+                            htmlFor="country"
+                            className="font-extrabold text-[#aaa]"
+                        >
+                            Select a Country
+                        </label>
+                        <Select
+                            isSearchable
+                            value={country}
+                            options={countryData}
+                            styles={customStyles}
+                            placeholder='Select a country...'
+                            getOptionLabel={(countryData) => countryData.label}
+                            getOptionValue={(countryData) => countryData.value}
+                            onChange={item => {
+                                HandleLoadIdData(item.value)
+                                setCountry(item);
+                            }}
+                        />
                     </div>
                     <div className='my-4'>
+                        <label
+                            htmlFor="idtype"
+                            className="font-extrabold text-[#aaa]"
+                        >
+                            Select an ID Type
+                        </label>
+                        <Select
+                            isSearchable
+                            options={IdTypeData}
+                            styles={customStyles}
+                            placeholder="Select an ID Type..."
+                            value={IdType}
+                            onChange={(item) => setIdType(item)}
+                            getOptionLabel={(IdTypeData) => IdTypeData.label}
+                            getOptionValue={(IdTypeData) => IdTypeData.value} />
+                    </div>
+                </div>
+                <div className='flex-col flex sm:grid sm:grid-cols-2 gap-x-6'>
+                    <div className='my-4'>
+                        <span className='font-extrabold  text-[#aaa]'>Identity Number</span>
+                        <input
+                            type="text"
+                            disabled={!IdType ? true : false}
+                            value={identityNumber}
+                            onChange={(e) => setIdentityNumber(e.target.value)}
+                            placeholder={IdType ? `Enter the ${IdType.label} number` : "Choose an Identity Type"}
+                            className="w-full p-2 text-lg transition-all duration-500 border-2 border-gray-200 outline-none rounded-xl dark:bg-transparent dark:border-2 dark:rounded-lg dark:border-white disabled:cursor-not-allowed"
+                        />
+                    </div>
+                    <div className='my-4'>
+                        <span className='font-extrabold  text-[#aaa]'>Address</span>
+                        <input
+                            type="text"
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
+                            placeholder="blah blah blah"
+                            className="w-full p-2 text-lg transition-all duration-500 border-2 border-gray-200 outline-none rounded-xl dark:bg-transparent dark:border-2 dark:rounded-lg dark:border-white"
+                        />
                     </div>
                 </div>
                 <div className='flex-col flex sm:grid sm:grid-cols-2 gap-x-6'>
