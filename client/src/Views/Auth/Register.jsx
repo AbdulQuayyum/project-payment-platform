@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import Select from 'react-select'
 
 import AuthLayout from '../../Layouts/Auth.Layout'
 
@@ -33,14 +34,14 @@ const Register = () => {
                     <span className='font-extrabold text-2xl sm:text-5xl text-[#aaa]'>Let's get started</span>
                     <span className='text-[#aaa]'>Please enter the following information to continue</span>
                 </div>
-                <div className='flex flex-col justify-between sm:flex-row gap-x-6'>
+                <div className='flex-col flex sm:grid sm:grid-cols-2 gap-x-6'>
                     <div className='my-4'>
                         <span className='font-extrabold  text-[#aaa]'>First Name</span>
                         <input
                             type="text"
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
-                            placeholder="blah"
+                            placeholder="Ajani"
                             className="w-full p-2 text-lg transition-all duration-500 border-2 border-gray-200 outline-none rounded-xl dark:bg-transparent dark:border-2 dark:rounded-lg dark:border-white"
                         />
                     </div>
@@ -50,12 +51,12 @@ const Register = () => {
                             type="text"
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
-                            placeholder="blah"
+                            placeholder="Ajanlekoko"
                             className="w-full p-2 text-lg transition-all duration-500 border-2 border-gray-200 outline-none rounded-xl dark:bg-transparent dark:border-2 dark:rounded-lg dark:border-white"
                         />
                     </div>
                 </div>
-                <div className='flex flex-col justify-between sm:flex-row gap-x-6'>
+                <div className='flex-col flex sm:grid sm:grid-cols-2 gap-x-6'>
                     <div className='my-4'>
                         <span className='font-extrabold  text-[#aaa]'>Email Addresss</span>
                         <input
@@ -77,7 +78,13 @@ const Register = () => {
                         />
                     </div>
                 </div>
-                <div className='flex flex-col justify-between w-full sm:flex-row sm:w gap-x-6'>
+                <div className='flex-col flex sm:grid sm:grid-cols-2 gap-x-6'>
+                    <div className='my-4'>
+                    </div>
+                    <div className='my-4'>
+                    </div>
+                </div>
+                <div className='flex-col flex sm:grid sm:grid-cols-2 gap-x-6'>
                     <div className='my-4'>
                         <span className='font-extrabold  text-[#aaa]'>Password</span>
                         <div className="relative">

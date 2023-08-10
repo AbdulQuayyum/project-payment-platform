@@ -1,0 +1,210 @@
+[
+    {
+        "country_code": "NG",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "NG",
+        "id_type": "DRIVERS_LICENSE"
+    },
+    {
+        "country_code": "NG",
+        "id_type": "NATIONAL_ID"
+    },
+    {
+        "country_code": "NG",
+        "id_type": "VOTER_ID"
+    },
+    {
+        "country_code": "DZ",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "AO",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "BW",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "BF",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "BI",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "CM",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "CV",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "TD",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "KM",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "CG",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "CI",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "CD",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "DJ",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "EG",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "GQ",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "ER",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "ET",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "GA",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "GM",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "GH",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "GW",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "KE",
+        "id_type": "DRIVERS_LICENSE"
+    },
+    {
+        "country_code": "LS",
+        "id_type": "NATIONAL_ID"
+    },
+    {
+        "country_code": "LR",
+        "id_type": "VOTER_ID"
+    },
+    {
+        "country_code": "LY",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "MG",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "MW",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "ML",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "MU",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "MA",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "MZ",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "NA",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "NE",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "RW",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "ST",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "SN",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "SC",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "SL",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "SO",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "ZA",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "SS",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "SD",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "TG",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "TN",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "UG",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "TZ",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "ZM",
+        "id_type": "PASSPORT"
+    },
+    {
+        "country_code": "ZW",
+        "id_type": "PASSPORT"
+    }
+]

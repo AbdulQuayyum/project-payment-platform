@@ -1,0 +1,206 @@
+[
+    {
+        "country_name": "Algeria",
+        "country_code": "DZ"
+    },
+    {
+        "country_name": "Angola",
+        "country_code": "AO"
+    },
+    {
+        "country_name": "Benin",
+        "country_code": "BJ"
+    },
+    {
+        "country_name": "Botswana",
+        "country_code": "BW"
+    },
+    {
+        "country_name": "Burkina Faso",
+        "country_code": "BF"
+    },
+    {
+        "country_name": "Burundi",
+        "country_code": "BI"
+    },
+    {
+        "country_name": "Cameroon",
+        "country_code": "CM"
+    },
+    {
+        "country_name": "Cabo Verde",
+        "country_code": "CV"
+    },
+    {
+        "country_name": "Chad",
+        "country_code": "TD"
+    },
+    {
+        "country_name": "Comoros",
+        "country_code": "KM"
+    },
+    {
+        "country_name": "Congo",
+        "country_code": "CG"
+    },
+    {
+        "country_name": "Côte d'Ivoire",
+        "country_code": "CI"
+    },
+    {
+        "country_name": "Democratic Republic of the Congo",
+        "country_code": "CD"
+    },
+    {
+        "country_name": "Djibouti",
+        "country_code": "DJ"
+    },
+    {
+        "country_name": "Egypt",
+        "country_code": "EG"
+    },
+    {
+        "country_name": "Equatorial Guinea",
+        "country_code": "GQ"
+    },
+    {
+        "country_name": "Eritrea",
+        "country_code": "ER"
+    },
+    {
+        "country_name": "Ethiopia",
+        "country_code": "ET"
+    },
+    {
+        "country_name": "Gabon",
+        "country_code": "GA"
+    },
+    {
+        "country_name": "Gambia",
+        "country_code": "GM"
+    },
+    {
+        "country_name": "Ghana",
+        "country_code": "GH"
+    },
+    {
+        "country_name": "Guinea",
+        "country_code": "GN"
+    },
+    {
+        "country_name": "Guinea-Bissau",
+        "country_code": "GW"
+    },
+    {
+        "country_name": "Kenya",
+        "country_code": "KE"
+    },
+    {
+        "country_name": "Lesotho",
+        "country_code": "LS"
+    },
+    {
+        "country_name": "Liberia",
+        "country_code": "LR"
+    },
+    {
+        "country_name": "Libya",
+        "country_code": "LY"
+    },
+    {
+        "country_name": "Madagascar",
+        "country_code": "MG"
+    },
+    {
+        "country_name": "Malawi",
+        "country_code": "MW"
+    },
+    {
+        "country_name": "Mali",
+        "country_code": "ML"
+    },
+    {
+        "country_name": "Mauritius",
+        "country_code": "MU"
+    },
+    {
+        "country_name": "Morocco",
+        "country_code": "MA"
+    },
+    {
+        "country_name": "Mozambique",
+        "country_code": "MZ"
+    },
+    {
+        "country_name": "Namibia",
+        "country_code": "NA"
+    },
+    {
+        "country_name": "Niger",
+        "country_code": "NE"
+    },
+    {
+        "country_name": "Nigeria",
+        "country_code": "NG"
+    },
+    {
+        "country_name": "Rwanda",
+        "country_code": "RW"
+    },
+    {
+        "country_name": "Sao Tome and Principe",
+        "country_code": "ST"
+    },
+    {
+        "country_name": "Senegal",
+        "country_code": "SN"
+    },
+    {
+        "country_name": "Seychelles",
+        "country_code": "SC"
+    },
+    {
+        "country_name": "Sierra Leone",
+        "country_code": "SL"
+    },
+    {
+        "country_name": "Somalia",
+        "country_code": "SO"
+    },
+    {
+        "country_name": "South Africa",
+        "country_code": "ZA"
+    },
+    {
+        "country_name": "South Sudan",
+        "country_code": "SS"
+    },
+    {
+        "country_name": "Sudan",
+        "country_code": "SD"
+    },
+    {
+        "country_name": "Togo",
+        "country_code": "TG"
+    },
+    {
+        "country_name": "Tunisia",
+        "country_code": "TN"
+    },
+    {
+        "country_name": "Uganda",
+        "country_code": "UG"
+    },
+    {
+        "country_name": "United Republic of Tanzania",
+        "country_code": "TZ"
+    },
+    {
+        "country_name": "Zambia",
+        "country_code": "ZM"
+    },
+    {
+        "country_name": "Zimbabwe",
+        "country_code": "ZW"
+    }
+]
