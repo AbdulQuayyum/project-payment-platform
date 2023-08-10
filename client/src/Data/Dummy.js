@@ -3,7 +3,7 @@ import { HiSpeakerWave } from "react-icons/hi"
 import { FaRegUser } from "react-icons/fa"
 import { TbSettings } from "react-icons/tb";
 
-export const chatData = [
+export const NotficationData = [
     {
         image: HiSpeakerWave,
         message: "Payment Platform",
@@ -24,7 +24,7 @@ export const chatData = [
     }
 ];
 
-export const userProfileData = [
+export const UserProfileData = [
     {
         icon: <FaRegUser />,
         title: "My Profile",
