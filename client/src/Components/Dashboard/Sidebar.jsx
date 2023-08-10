@@ -58,7 +58,7 @@ const Sidebar = () => {
                       <span className="py-2 mx-4 text-lg font-semibold">Home</span>
                     </NavLink>
                     <NavLink
-                      to="/"
+                      to="/a"
                       onClick={HandleCloseSideBar}
                       className={(isActive) => (isActive ? activeLink : normalLink)}
                     >

@@ -18,7 +18,7 @@ const Notification = () => {
             <div className="mt-5 ">
                 {NotficationData?.map((item, index) => (
                     <div key={index} className="flex items-center gap-5 p-3 leading-8 border-b-1 border-color">
-                        <img className="w-10 h-10 rounded-full" src={item.image} alt={item.message} />
+                        {item.image}
                         <div>
                             <p className="font-semibold dark:text-gray-200">{item.message}</p>
                             <p className="text-base text-gray-500 dark:text-gray-400"> {item.desc} </p>

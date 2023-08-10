@@ -52,7 +52,7 @@ const DashboardNavbar = () => {
                 customFunc={HandleActiveMenu}
                 icon={<HiMenuAlt2 className="mt-1 dark:text-white lg:hidden" />}
             />
-            <div className="flex">
+            <div className="flex items-center">
                 <NavButton
                     title="Notification"
                     dotColor="#FF0202"
@@ -64,17 +64,15 @@ const DashboardNavbar = () => {
                         className="flex items-center gap-2 pl-1 pr-2 rounded-lg cursor-pointer sm:pl-5 sm:pr-10 hover:bg-light-gray"
                         onClick={() => handleClick("userProfile")}
                     >
-                        <>
-                            < FaRegUser className="w-10 h-10 border-[#20ABB7] border-2 rounded-full" />
+                        <div className="flex items-center gap-x-2">
+                            < FaRegUser className="w-8 h-8" />
                             <div className="flex flex-col">
-                                <p>
-                                    <span className="ml-1 font-bold text-black text-14">
-                                        Ayinla
-                                    </span>
-                                </p>
+                                <span className="font-extrabold text-[#aaa] text-[20px]">
+                                    Ayinla
+                                </span>
                             </div>
 
-                        </>
+                        </div>
                     </div>
                 </div>
                 {isClicked.notification && <Notification />}

@@ -20,14 +20,10 @@ const UserProfile = () => {
                 />
             </div>
             <div className="flex items-center gap-5 pb-6 mt-6 border-color border-b-1">
-                <img
-                    className="w-24 h-24 rounded-full"
-                    src={User || <FaRegUser />}
-                    alt="user-profile"
-                />
+                < FaRegUser className="w-20 h-20" />
                 <div>
-                    <p className="text-xl font-semibold dark:text-gray-200">{fullName || "Ayinla Akekereko"}</p>
-                    <p className="text-base font-semibold text-gray-500 dark:text-gray-400"> {email || "ayinlaakekero@gmail.com"}</p>
+                    <p className="text-xl font-semibold dark:text-gray-200">Ayinla Akekereko</p>
+                    <p className="text-base font-semibold text-gray-500 dark:text-gray-400">ayinlaakekero@gmail.com</p>
                 </div>
             </div>
             <div>
