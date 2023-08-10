@@ -1,4 +1,7 @@
-import Footer from "./Footer";
-import Navbar from "./Navbar";
+import Footer from "./Auth/Footer";
+import Navbar from "./Auth/Navbar";
 
-export { Footer, Navbar }
+import DashboardNavbar from "./Dashboard/Navbar";
+import Sidebar from "./Dashboard/Sidebar";
+
+export { Footer, Navbar, DashboardNavbar, Sidebar }
