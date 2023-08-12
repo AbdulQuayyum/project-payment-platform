@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, NavLink } from "react-router-dom";
-import { TbX, TbListDetails } from "react-icons/tb"
+import { TbArrowBigLeftLines, TbListDetails } from "react-icons/tb"
 import { RxDashboard } from "react-icons/rx"
 import { PiUserList, PiArrowsLeftRightBold } from "react-icons/pi"
 import { FaRegUser } from "react-icons/fa"
@@ -21,13 +21,13 @@ const Sidebar = () => {
   const activeLink =
     "flex items-center px-4 py-2 my-2 text-[#000] border-l-4 border-[#000] bg-[#e5e7eb] rounded-r-full dark:bg-gray-700 dark:text-gray-200";
   const normalLink =
-    "flex items-center px-4 py-2 my-2 text-gray-400 transition-colors duration-200 transform rounded-md dark:text-gray-400 hover:bg-[$F4F4F5] dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-500";
+    "flex items-center px-4 py-2 my-2 text-gray-400 transition-colors duration-200 transform rounded-md dark:text-gray-400 hover:bg-[$F4F4F5] hover:text-black dark:hover:bg-gray-700 dark:hover:text-gray-200";
 
   return (
-    <div className="absolute flex flex-col min-h-screen py-8 w-72 dark:border-gray-600">
+    <div className="flex flex-col min-h-screen py-2 sm:py-4 w-72 dark:border-gray-600">
       {activeMenu && (
         <>
-          <div className="absolute flex items-center justify-between">
+          <div className="flex items-center justify-between">
             <Link
               to="/"
               onClick={HandleCloseSideBar}
@@ -39,9 +39,9 @@ const Sidebar = () => {
               <button
                 type="button"
                 onClick={() => setActiveMenu(!activeMenu)}
-                className="items-center block p-3 mt-4 text-xl rounded-full hover:bg-light-gray md:hidden"
+                className="items-center block p-3 text-xl rounded-full hover:bg-light-gray md:hidden"
               >
-                <TbX />
+                <TbArrowBigLeftLines size={24} />
               </button>
             </div>
           </div>
