@@ -1,9 +1,21 @@
-import React from 'react'
+import { AxiosInstance } from "./Main";
 
-const UsersApi = () => {
-    return (
-        <div>UsersApi</div>
-    )
+// Login into User Account
+export const LoginUser = async (payload) => {
+    try {
+        const { data } = await AxiosInstance.post(`${import.meta.env.VITE_SERVER_URL}/v1/Users/Login`, payload)
+        return data
+    } catch (error) {
+        return error.response.data
+    }
 }
 
-export default UsersApi
+// Create a new User Account
+export const RegisterUser = async (payload) => {
+    try {
+        const { data } = await AxiosInstance.post(`${import.meta.env.VITE_SERVER_URL}/v1/Users/Register`, payload)
+        return data
+    } catch (error) {
+        return error.response.data
+    }
+}

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import AuthLayout from "../../Layouts/Auth.Layout.jsx"
+import { LoginUser } from '../../APIs/Users.api.js'
 
 const Login = () => {
     const [email, setEmail] = useState("")
@@ -10,6 +11,18 @@ const Login = () => {
 
     function TogglePasswordVisibility() {
         setIsPasswordVisible((prevState) => !prevState);
+    }
+
+    const SubmitValues = async ({ email, password }) => {
+        try {
+            const response = await RegisterUser({ email, password })
+            if (response.success) {
+                alert(response.message)
+                // navigate("/Dashboard")
+            }
+        } catch (error) {
+            alert(error.message)
+        }
     }
 
     return (
@@ -83,7 +96,9 @@ const Login = () => {
                     </div>
                 </div>
                 <div className='flex w-full my-4'>
-                    <button className='w-full px-8 py-3 text-sm text-white transition-all bg-black border border-black rounded-full hover:bg-white hover:text-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white'>
+                    <button
+                        onClick={SubmitValues}
+                        className='w-full px-8 py-3 text-sm text-white transition-all bg-black border border-black rounded-full hover:bg-white hover:text-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white'>
                         Login
                     </button>
                 </div>

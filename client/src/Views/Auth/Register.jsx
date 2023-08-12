@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Select from 'react-select'
 
 import AuthLayout from '../../Layouts/Auth.Layout'
 import CountryRawData from "../../Data/Country.json"
 import IDRawData from "../../Data/IdType.json"
+import { RegisterUser } from '../../APIs/Users.api'
 
 const Register = () => {
     const [firstName, setFirstName] = useState("")
@@ -21,6 +22,8 @@ const Register = () => {
     const [IdTypeData, setIdTypeData] = useState([])
     const [country, setCountry] = useState(null);
     const [IdType, setIdType] = useState(null)
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         var count = Object.keys(CountryRawData).length;
@@ -73,6 +76,18 @@ const Register = () => {
 
     function ToggleConfirmPasswordVisibility() {
         setIsConfirmPasswordVisible((prevState) => !prevState);
+    }
+
+    const SubmitValues = async ({ firstName, lastName, email, phone, address, identityNumber, password, country, IdType }) => {
+        try {
+            const response = await RegisterUser({ firstName, lastName, email, phone, address, identityNumber, password, country, IdType })
+            if (response.success) {
+                alert(response.message)
+                navigate("/Login")
+            }
+        } catch (error) {
+            alert(error.message)
+        }
     }
 
     return (
@@ -298,7 +313,9 @@ const Register = () => {
                     </div>
                 </div>
                 <div className='flex w-full my-4'>
-                    <button className='w-full px-8 py-3 text-sm text-white transition-all bg-black border border-black rounded-full hover:bg-white hover:text-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white'>
+                    <button
+                        onClick={SubmitValues}
+                        className='w-full px-8 py-3 text-sm text-white transition-all bg-black border border-black rounded-full hover:bg-white hover:text-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white'>
                         Register
                     </button>
                 </div>
