@@ -1,0 +1,21 @@
+{
+  "name": "Server",
+  "version": "1.0.0",
+  "description": "The Server Side of a Payment Platform",
+  "main": "Server.js",
+  "scripts": {
+    "start": "node Server.js",
+    "dev": "nodemon Server.js"
+  },
+  "repository": "https://github.com/AbdulQuayyum/project-payment-platform/tree/Source/Server",
+  "author": "Abdul-Quayyum",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.1",
+    "mongoose": "^7.4.3",
+    "nodemon": "^3.0.1"
+  }
+}
