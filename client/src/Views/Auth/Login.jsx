@@ -5,7 +5,7 @@ import AuthLayout from "../../Layouts/Auth.Layout.jsx"
 import { LoginUser } from '../../APIs/Users.api.js'
 
 const Login = () => {
-    const [email, setEmail] = useState("")
+    const [Email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -13,9 +13,9 @@ const Login = () => {
         setIsPasswordVisible((prevState) => !prevState);
     }
 
-    const SubmitValues = async ({ email, password }) => {
+    const SubmitValues = async ({ Email, password }) => {
         try {
-            const response = await RegisterUser({ email, password })
+            const response = await RegisterUser({ Email, password })
             if (response.success) {
                 alert(response.message)
                 // navigate("/Dashboard")
@@ -35,8 +35,8 @@ const Login = () => {
                 <div className='my-4'>
                     <span className='font-extrabold  text-[#aaa]'>Email Addresss</span>
                     <input
-                        type="email"
-                        value={email}
+                        type="Email"
+                        value={Email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="blahblah@gmail.com"
                         className="w-full p-2 text-lg transition-all duration-500 border-2 border-gray-200 outline-none rounded-xl dark:bg-transparent dark:border-2 dark:rounded-lg dark:border-white"

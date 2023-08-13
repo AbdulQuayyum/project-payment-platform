@@ -78,17 +78,48 @@ const Register = () => {
         setIsConfirmPasswordVisible((prevState) => !prevState);
     }
 
-    const SubmitValues = async ({ firstName, lastName, email, phone, address, identityNumber, password, country, IdType }) => {
+    // const SubmitValues = async ({ firstName, lastName, Email, phone, address, identityNumber, password, country, IdType }) => {
+    //     try {
+    //         const response = await RegisterUser({ firstName, lastName, Email, phone, address, identityNumber, password, country, IdType })
+    //         if (response.success) {
+    //             alert(response.message)
+    //             navigate("/Login")
+    //         }
+    //     } catch (error) {
+    //         alert(error.message)
+    //     }
+    // }
+
+    const SubmitValues = async () => {
         try {
-            const response = await RegisterUser({ firstName, lastName, email, phone, address, identityNumber, password, country, IdType })
+            if (!firstName || !lastName || !email || !phone || !address || !identityNumber || !password || !country || !IdType) {
+                alert("Please fill in all the required fields.");
+                return;
+            }
+
+            const response = await RegisterUser({
+                FirstName: firstName,
+                LastName: lastName,
+                Email: email,
+                PhoneNumber: phone,
+                Address: address,
+                IdentificationNumber: identityNumber,
+                Password: password,
+                Country: country.value, // Access the 'value' property of the selected country
+                IdentificationType: IdType.value // Access the 'value' property of the selected ID type
+            });
+
             if (response.success) {
-                alert(response.message)
-                navigate("/Login")
+                alert(response.message);
+                navigate("/Login");
+            } else {
+                alert("Registration failed: " + response.message);
             }
         } catch (error) {
-            alert(error.message)
+            alert(error.message);
         }
-    }
+    };
+
 
     return (
         <AuthLayout>
@@ -97,7 +128,7 @@ const Register = () => {
                     <span className='font-extrabold text-2xl sm:text-5xl text-[#aaa]'>Let's get started</span>
                     <span className='text-[#aaa]'>Please enter the following information to continue</span>
                 </div>
-                <div className='flex-col flex sm:grid sm:grid-cols-2 gap-x-6'>
+                <div className='flex flex-col sm:grid sm:grid-cols-2 gap-x-6'>
                     <div className='my-4'>
                         <span className='font-extrabold  text-[#aaa]'>First Name</span>
                         <input
@@ -119,7 +150,7 @@ const Register = () => {
                         />
                     </div>
                 </div>
-                <div className='flex-col flex sm:grid sm:grid-cols-2 gap-x-6'>
+                <div className='flex flex-col sm:grid sm:grid-cols-2 gap-x-6'>
                     <div className='my-4'>
                         <span className='font-extrabold  text-[#aaa]'>Email Addresss</span>
                         <input
@@ -141,7 +172,7 @@ const Register = () => {
                         />
                     </div>
                 </div>
-                <div className='flex-col flex sm:grid sm:grid-cols-2 gap-x-6'>
+                <div className='flex flex-col sm:grid sm:grid-cols-2 gap-x-6'>
                     <div className='my-4'>
                         <label
                             htmlFor="country"
@@ -181,7 +212,7 @@ const Register = () => {
                             getOptionValue={(IdTypeData) => IdTypeData.value} />
                     </div>
                 </div>
-                <div className='flex-col flex sm:grid sm:grid-cols-2 gap-x-6'>
+                <div className='flex flex-col sm:grid sm:grid-cols-2 gap-x-6'>
                     <div className='my-4'>
                         <span className='font-extrabold  text-[#aaa]'>Identity Number</span>
                         <input
@@ -204,7 +235,7 @@ const Register = () => {
                         />
                     </div>
                 </div>
-                <div className='flex-col flex sm:grid sm:grid-cols-2 gap-x-6'>
+                <div className='flex flex-col sm:grid sm:grid-cols-2 gap-x-6'>
                     <div className='my-4'>
                         <span className='font-extrabold  text-[#aaa]'>Password</span>
                         <div className="relative">
