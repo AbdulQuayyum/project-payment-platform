@@ -1,27 +1,45 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import toast from 'react-hot-toast';
 
 import AuthLayout from "../../Layouts/Auth.Layout.jsx"
 import { LoginUser } from '../../APIs/Users.api.js'
 
 const Login = () => {
-    const [Email, setEmail] = useState("")
+    const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+    const delay = ms => new Promise(
+        resolve => setTimeout(resolve, ms)
+    )
 
     function TogglePasswordVisibility() {
         setIsPasswordVisible((prevState) => !prevState);
     }
 
-    const SubmitValues = async ({ Email, password }) => {
+    const SubmitValues = async () => {
         try {
-            const response = await RegisterUser({ Email, password })
+            if (!email || !password) {
+                toast.error("Please fill in all the required fields.", { duration: 4000, position: 'top-right' })
+                return;
+            }
+
+            const response = await LoginUser({
+                Email: email,
+                Password: password
+            })
+
             if (response.success) {
-                alert(response.message)
-                // navigate("/Dashboard")
+                toast.success(response.message, { duration: 4000, position: 'top-right' })
+                async function nextPage() {
+                    await delay(4000)
+                    // navigate("/Dashboard")
+                }
+                nextPage()
             }
         } catch (error) {
-            alert(error.message)
+            toast.error(error.message, { duration: 4000, position: 'top-right' })
         }
     }
 
@@ -35,8 +53,8 @@ const Login = () => {
                 <div className='my-4'>
                     <span className='font-extrabold  text-[#aaa]'>Email Addresss</span>
                     <input
-                        type="Email"
-                        value={Email}
+                        type="email"
+                        value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="blahblah@gmail.com"
                         className="w-full p-2 text-lg transition-all duration-500 border-2 border-gray-200 outline-none rounded-xl dark:bg-transparent dark:border-2 dark:rounded-lg dark:border-white"

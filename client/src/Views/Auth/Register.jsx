@@ -26,6 +26,9 @@ const Register = () => {
     const [consent, setConsent] = useState(false);
 
     const navigate = useNavigate()
+    const delay = ms => new Promise(
+        resolve => setTimeout(resolve, ms)
+    )
 
     useEffect(() => {
         var count = Object.keys(CountryRawData).length;
@@ -108,7 +111,11 @@ const Register = () => {
 
             if (response.success) {
                 toast.success(response.message, { duration: 4000, position: 'top-right' })
-                navigate("/Login");
+                async function nextPage() {
+                    await delay(4000)
+                    // navigate("/Login")
+                }
+                nextPage()
             } else {
                 toast.error("Registration failed: " + response.message, { duration: 4000, position: 'top-right' })
             }
