@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Select from 'react-select'
+import toast from 'react-hot-toast';
 
 import AuthLayout from '../../Layouts/Auth.Layout'
 import CountryRawData from "../../Data/Country.json"
@@ -22,6 +23,7 @@ const Register = () => {
     const [IdTypeData, setIdTypeData] = useState([])
     const [country, setCountry] = useState(null);
     const [IdType, setIdType] = useState(null)
+    const [consent, setConsent] = useState(false);
 
     const navigate = useNavigate()
 
@@ -78,22 +80,17 @@ const Register = () => {
         setIsConfirmPasswordVisible((prevState) => !prevState);
     }
 
-    // const SubmitValues = async ({ firstName, lastName, Email, phone, address, identityNumber, password, country, IdType }) => {
-    //     try {
-    //         const response = await RegisterUser({ firstName, lastName, Email, phone, address, identityNumber, password, country, IdType })
-    //         if (response.success) {
-    //             alert(response.message)
-    //             navigate("/Login")
-    //         }
-    //     } catch (error) {
-    //         alert(error.message)
-    //     }
-    // }
+    useEffect(() => {
+        if (confirmPassword !== password) {
+            toast.error("Passwords do not match.", { duration: 1000, position: 'top-right' })
+        } 
+    }, [confirmPassword])
+
 
     const SubmitValues = async () => {
         try {
             if (!firstName || !lastName || !email || !phone || !address || !identityNumber || !password || !country || !IdType) {
-                alert("Please fill in all the required fields.");
+                toast.error("Please fill in all the required fields.", { duration: 4000, position: 'top-right' })
                 return;
             }
 
@@ -110,13 +107,13 @@ const Register = () => {
             });
 
             if (response.success) {
-                alert(response.message);
+                toast.success(response.message, { duration: 4000, position: 'top-right' })
                 navigate("/Login");
             } else {
-                alert("Registration failed: " + response.message);
+                toast.error("Registration failed: " + response.message, { duration: 4000, position: 'top-right' })
             }
         } catch (error) {
-            alert(error.message);
+            toast.error(error.message, { duration: 4000, position: 'top-right' })
         }
     };
 
@@ -295,6 +292,7 @@ const Register = () => {
                             <input
                                 type={isConfirmPasswordVisible ? "text" : "password"}
                                 value={confirmPassword}
+                                // onMouseLeave={confirmPassword !== password ? toast.error("Passwords do not match.") : null}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 placeholder="********"
                                 className="w-full p-2 text-lg transition-all duration-500 border-2 border-gray-200 outline-none rounded-xl dark:bg-transparent dark:border-2 dark:rounded-lg dark:border-white"
@@ -343,10 +341,16 @@ const Register = () => {
                         </div>
                     </div>
                 </div>
+                <div className="px-1 mt-4 sm:px-0">
+                    <input type="checkbox" name="" id="consent" className="w-3 h-3 mr-2 cursor-pointer accent-black" value={consent}
+                        onChange={() => setConsent(!consent)} />
+                    <label htmlFor="consent" className="text-sm">I consent that the collection, use and disclosure of my personal data for identity verification and safety purposes.</label>
+                </div>
                 <div className='flex w-full my-4'>
                     <button
+                        disabled={!consent}
                         onClick={SubmitValues}
-                        className='w-full px-8 py-3 text-sm text-white transition-all bg-black border border-black rounded-full hover:bg-white hover:text-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white'>
+                        className='w-full px-8 py-3 text-sm text-white transition-all bg-black border border-black rounded-full disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white hover:text-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white'>
                         Register
                     </button>
                 </div>
