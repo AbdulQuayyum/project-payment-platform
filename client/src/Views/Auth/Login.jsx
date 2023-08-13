@@ -19,6 +19,10 @@ const Login = () => {
         setIsPasswordVisible((prevState) => !prevState);
     }
 
+    function ReverseString(str) {
+        return str.split('').reverse().join('');
+    }
+
     const SubmitValues = async () => {
         try {
             if (!email || !password) {
@@ -32,6 +36,8 @@ const Login = () => {
 
             if (response.success) {
                 toast.success(response.message, { duration: 2000, position: 'top-right' })
+                // Reversing string because i have trust issues
+                localStorage.setItem("QAZWSX", ReverseString(response.data))
                 async function nextPage() {
                     await delay(2000)
                     navigate("/Dashboard")
