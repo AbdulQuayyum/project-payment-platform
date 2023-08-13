@@ -25,7 +25,6 @@ const Login = () => {
                 toast.error("Please fill in all the required fields.", { duration: 4000, position: 'top-right' })
                 return;
             }
-
             const response = await LoginUser({
                 Email: email,
                 Password: password
@@ -38,6 +37,8 @@ const Login = () => {
                     navigate("/Dashboard")
                 }
                 nextPage()
+            } else {
+                toast.error(response.message, { duration: 4000, position: 'top-right' })
             }
         } catch (error) {
             toast.error(error.message, { duration: 4000, position: 'top-right' })
