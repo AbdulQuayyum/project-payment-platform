@@ -1,15 +1,46 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import toast from 'react-hot-toast';
 
 import AuthLayout from "../../Layouts/Auth.Layout.jsx"
+import { LoginUser } from '../../APIs/Users.api.js'
 
 const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
+    const delay = ms => new Promise(
+        resolve => setTimeout(resolve, ms)
+    )
+
     function TogglePasswordVisibility() {
         setIsPasswordVisible((prevState) => !prevState);
+    }
+
+    const SubmitValues = async () => {
+        try {
+            if (!email || !password) {
+                toast.error("Please fill in all the required fields.", { duration: 4000, position: 'top-right' })
+                return;
+            }
+
+            const response = await LoginUser({
+                Email: email,
+                Password: password
+            })
+
+            if (response.success) {
+                toast.success(response.message, { duration: 4000, position: 'top-right' })
+                async function nextPage() {
+                    await delay(4000)
+                    // navigate("/Dashboard")
+                }
+                nextPage()
+            }
+        } catch (error) {
+            toast.error(error.message, { duration: 4000, position: 'top-right' })
+        }
     }
 
     return (
@@ -83,7 +114,9 @@ const Login = () => {
                     </div>
                 </div>
                 <div className='flex w-full my-4'>
-                    <button className='w-full px-8 py-3 text-sm text-white transition-all bg-black border border-black rounded-full hover:bg-white hover:text-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white'>
+                    <button
+                        onClick={SubmitValues}
+                        className='w-full px-8 py-3 text-sm text-white transition-all bg-black border border-black rounded-full hover:bg-white hover:text-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white'>
                         Login
                     </button>
                 </div>

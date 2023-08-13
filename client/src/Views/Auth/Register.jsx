@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Select from 'react-select'
+import toast from 'react-hot-toast';
 
 import AuthLayout from '../../Layouts/Auth.Layout'
 import CountryRawData from "../../Data/Country.json"
 import IDRawData from "../../Data/IdType.json"
+import { RegisterUser } from '../../APIs/Users.api'
 
 const Register = () => {
     const [firstName, setFirstName] = useState("")
@@ -21,6 +23,12 @@ const Register = () => {
     const [IdTypeData, setIdTypeData] = useState([])
     const [country, setCountry] = useState(null);
     const [IdType, setIdType] = useState(null)
+    const [consent, setConsent] = useState(false);
+
+    const navigate = useNavigate()
+    const delay = ms => new Promise(
+        resolve => setTimeout(resolve, ms)
+    )
 
     useEffect(() => {
         var count = Object.keys(CountryRawData).length;
@@ -75,6 +83,48 @@ const Register = () => {
         setIsConfirmPasswordVisible((prevState) => !prevState);
     }
 
+    useEffect(() => {
+        if (confirmPassword !== password) {
+            toast.error("Passwords do not match.", { duration: 1000, position: 'top-right' })
+        } 
+    }, [confirmPassword])
+
+
+    const SubmitValues = async () => {
+        try {
+            if (!firstName || !lastName || !email || !phone || !address || !identityNumber || !password || !country || !IdType) {
+                toast.error("Please fill in all the required fields.", { duration: 4000, position: 'top-right' })
+                return;
+            }
+
+            const response = await RegisterUser({
+                FirstName: firstName,
+                LastName: lastName,
+                Email: email,
+                PhoneNumber: phone,
+                Address: address,
+                IdentificationNumber: identityNumber,
+                Password: password,
+                Country: country.value, // Access the 'value' property of the selected country
+                IdentificationType: IdType.value // Access the 'value' property of the selected ID type
+            });
+
+            if (response.success) {
+                toast.success(response.message, { duration: 4000, position: 'top-right' })
+                async function nextPage() {
+                    await delay(4000)
+                    // navigate("/Login")
+                }
+                nextPage()
+            } else {
+                toast.error("Registration failed: " + response.message, { duration: 4000, position: 'top-right' })
+            }
+        } catch (error) {
+            toast.error(error.message, { duration: 4000, position: 'top-right' })
+        }
+    };
+
+
     return (
         <AuthLayout>
             <div className='flex flex-col border-2 border-[#aaa] rounded-3xl py-5 sm:py-10 px-6 sm:px-14'>
@@ -82,7 +132,7 @@ const Register = () => {
                     <span className='font-extrabold text-2xl sm:text-5xl text-[#aaa]'>Let's get started</span>
                     <span className='text-[#aaa]'>Please enter the following information to continue</span>
                 </div>
-                <div className='flex-col flex sm:grid sm:grid-cols-2 gap-x-6'>
+                <div className='flex flex-col sm:grid sm:grid-cols-2 gap-x-6'>
                     <div className='my-4'>
                         <span className='font-extrabold  text-[#aaa]'>First Name</span>
                         <input
@@ -104,7 +154,7 @@ const Register = () => {
                         />
                     </div>
                 </div>
-                <div className='flex-col flex sm:grid sm:grid-cols-2 gap-x-6'>
+                <div className='flex flex-col sm:grid sm:grid-cols-2 gap-x-6'>
                     <div className='my-4'>
                         <span className='font-extrabold  text-[#aaa]'>Email Addresss</span>
                         <input
@@ -126,7 +176,7 @@ const Register = () => {
                         />
                     </div>
                 </div>
-                <div className='flex-col flex sm:grid sm:grid-cols-2 gap-x-6'>
+                <div className='flex flex-col sm:grid sm:grid-cols-2 gap-x-6'>
                     <div className='my-4'>
                         <label
                             htmlFor="country"
@@ -166,7 +216,7 @@ const Register = () => {
                             getOptionValue={(IdTypeData) => IdTypeData.value} />
                     </div>
                 </div>
-                <div className='flex-col flex sm:grid sm:grid-cols-2 gap-x-6'>
+                <div className='flex flex-col sm:grid sm:grid-cols-2 gap-x-6'>
                     <div className='my-4'>
                         <span className='font-extrabold  text-[#aaa]'>Identity Number</span>
                         <input
@@ -189,7 +239,7 @@ const Register = () => {
                         />
                     </div>
                 </div>
-                <div className='flex-col flex sm:grid sm:grid-cols-2 gap-x-6'>
+                <div className='flex flex-col sm:grid sm:grid-cols-2 gap-x-6'>
                     <div className='my-4'>
                         <span className='font-extrabold  text-[#aaa]'>Password</span>
                         <div className="relative">
@@ -249,6 +299,7 @@ const Register = () => {
                             <input
                                 type={isConfirmPasswordVisible ? "text" : "password"}
                                 value={confirmPassword}
+                                // onMouseLeave={confirmPassword !== password ? toast.error("Passwords do not match.") : null}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 placeholder="********"
                                 className="w-full p-2 text-lg transition-all duration-500 border-2 border-gray-200 outline-none rounded-xl dark:bg-transparent dark:border-2 dark:rounded-lg dark:border-white"
@@ -297,8 +348,16 @@ const Register = () => {
                         </div>
                     </div>
                 </div>
+                <div className="px-1 mt-4 sm:px-0">
+                    <input type="checkbox" name="" id="consent" className="w-3 h-3 mr-2 cursor-pointer accent-black" value={consent}
+                        onChange={() => setConsent(!consent)} />
+                    <label htmlFor="consent" className="text-sm">I consent that the collection, use and disclosure of my personal data for identity verification and safety purposes.</label>
+                </div>
                 <div className='flex w-full my-4'>
-                    <button className='w-full px-8 py-3 text-sm text-white transition-all bg-black border border-black rounded-full hover:bg-white hover:text-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white'>
+                    <button
+                        disabled={!consent}
+                        onClick={SubmitValues}
+                        className='w-full px-8 py-3 text-sm text-white transition-all bg-black border border-black rounded-full disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white hover:text-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white'>
                         Register
                     </button>
                 </div>
