@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast';
 
 import AuthLayout from "../../Layouts/Auth.Layout.jsx"
@@ -10,6 +10,7 @@ const Login = () => {
     const [password, setPassword] = useState("")
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
+    const navigate = useNavigate()
     const delay = ms => new Promise(
         resolve => setTimeout(resolve, ms)
     )
@@ -31,10 +32,10 @@ const Login = () => {
             })
 
             if (response.success) {
-                toast.success(response.message, { duration: 4000, position: 'top-right' })
+                toast.success(response.message, { duration: 2000, position: 'top-right' })
                 async function nextPage() {
-                    await delay(4000)
-                    // navigate("/Dashboard")
+                    await delay(2000)
+                    navigate("/Dashboard")
                 }
                 nextPage()
             }

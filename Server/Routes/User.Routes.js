@@ -48,7 +48,7 @@ router.post("/Login", async (req, res) => {
         }
 
         // Check if Password is valid
-        const ValidatePassword = await bcrypt.compare(req.body.Password, User.Password)
+        const ValidatePassword = await bcrypt.compare(req.body.Password, CheckUser.Password) // Use CheckUser.Password
         if (!ValidatePassword) {
             return res.send({
                 success: false,
@@ -57,10 +57,10 @@ router.post("/Login", async (req, res) => {
         }
 
         // Generate token
-        const Token = jwt.sign({ UserID: User._id }, process.env.SECRET_KEY, { expiresIn: 60 * 10 })
+        const Token = jwt.sign({ UserID: CheckUser._id }, process.env.SECRET_KEY, { expiresIn: 60 * 10 })
         res.send({
-            message: "User has been signed successfully",
-            data: data,
+            message: "User has been signed in successfully",
+            data: Token, // Use Token here
             success: true
         })
     } catch (error) {

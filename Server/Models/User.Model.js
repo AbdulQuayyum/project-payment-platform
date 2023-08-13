@@ -37,6 +37,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    Balance: {
+        type: Number,
+        default: 0,
+    },
     IsVerified: {
         type: Boolean,
         default: false
