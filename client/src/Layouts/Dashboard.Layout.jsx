@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux"
 
 import { DashboardNavbar, Sidebar } from "../Components/Index";
 import { UseStateContext } from "../Contexts/DashboardContext";
 
 export const DashboardLayout = ({ children }) => {
-    // const { children } = props;
+    const { user } = useSelector((state) => state.users)
     const location = useLocation();
     const { activeMenu } = UseStateContext();
 
@@ -35,7 +36,7 @@ export const DashboardLayout = ({ children }) => {
                     }
                 >
                     <div className="w-full md:static navbar ">
-                        <DashboardNavbar />
+                        <DashboardNavbar user={user} />
                     </div>
                     <div className="z-40 p-4 onboard">
                         {children}
