@@ -21,11 +21,11 @@ export const DashboardLayout = ({ children }) => {
             <div className="relative flex min-h-screen transition-all duration-150 bg-[#f8f8f8] dark:bg-[#111827]">
                 {activeMenu ? (
                     <div className="fixed bg-white w-72 sidebar dark:bg-[#283046]">
-                        <Sidebar />
+                        <Sidebar user={user} />
                     </div>
                 ) : (
                     <div className="w-0 bg-none">
-                        <Sidebar />
+                        <Sidebar user={user} />
                     </div>
                 )}
                 <div
