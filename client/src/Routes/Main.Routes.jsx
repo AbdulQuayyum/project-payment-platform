@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route } from "react-router-dom";
 
-import { Protected } from "../Components/Index"
+import ProtectedRoutes from './Protected.Routes';
 import { Home, Login, Register, DashboardHome } from '../Views/Index';
 
 const MainRoutes = () => {
@@ -10,7 +10,7 @@ const MainRoutes = () => {
             <Route path='/' element={<Home />} />
             <Route path='/Login' element={<Login />} />
             <Route path='/Register' element={<Register />} />
-            <Route path='/Dashboard' element={<Protected><DashboardHome /></Protected>} />
+            <Route path='/Dashboard' element={<ProtectedRoutes><DashboardHome /></ProtectedRoutes>} />
         </Routes>
     )
 }
