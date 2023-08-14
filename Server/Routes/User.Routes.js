@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
 const User = require("../Models/User.Model")
+const AuthMiddleware = require("../Middlewares/Auth.Middleware")
 
 // Create a new User Account
 router.post("/Register", async (req, res) => {
@@ -68,6 +69,30 @@ router.post("/Login", async (req, res) => {
             message: error.message,
             success: false
         })
+    }
+})
+
+// Get User's Information
+router.post("/GetUserInformation", AuthMiddleware, async (req, res) => {
+    try {
+        const NewUser = await User.findById(req.body.UserID)
+        NewUser.Password = "****"
+        if (!NewUser) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
+        return res.status(200).json({
+            message: "User Information fetched successfully",
+            data: NewUser,
+            success: true
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message,
+            success: false
+        });
     }
 })
 
