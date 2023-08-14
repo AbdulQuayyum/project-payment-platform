@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux"
 
 import { DashboardNavbar, Sidebar } from "../Components/Index";
 import { UseStateContext } from "../Contexts/DashboardContext";
 
-export const DashboardLayout = (props) => {
-    const { children } = props;
+export const DashboardLayout = ({ children }) => {
+    const { user } = useSelector((state) => state.users)
     const location = useLocation();
     const { activeMenu } = UseStateContext();
 
@@ -20,11 +21,11 @@ export const DashboardLayout = (props) => {
             <div className="relative flex min-h-screen transition-all duration-150 bg-[#f8f8f8] dark:bg-[#111827]">
                 {activeMenu ? (
                     <div className="fixed bg-white w-72 sidebar dark:bg-[#283046]">
-                        <Sidebar />
+                        <Sidebar user={user} />
                     </div>
                 ) : (
                     <div className="w-0 bg-none">
-                        <Sidebar />
+                        <Sidebar user={user} />
                     </div>
                 )}
                 <div
@@ -35,7 +36,7 @@ export const DashboardLayout = (props) => {
                     }
                 >
                     <div className="w-full md:static navbar ">
-                        <DashboardNavbar />
+                        <DashboardNavbar user={user} />
                     </div>
                     <div className="z-40 p-4 onboard">
                         {children}

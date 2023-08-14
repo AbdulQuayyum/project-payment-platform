@@ -5,7 +5,7 @@ import { FaRegUser } from "react-icons/fa"
 import Button from './Button';
 import { UserProfileData } from '../../../Data/Dummy';
 
-const UserProfile = () => {
+const UserProfile = ({ user }) => {
 
     return (
         <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96">
@@ -22,8 +22,8 @@ const UserProfile = () => {
             <div className="flex items-center gap-5 pb-6 mt-6 border-color border-b-1">
                 < FaRegUser className="w-20 h-20" />
                 <div>
-                    <p className="text-xl font-semibold dark:text-gray-200">Ayinla Akekereko</p>
-                    <p className="text-base font-semibold text-gray-500 dark:text-gray-400">ayinlaakekero@gmail.com</p>
+                    <p className="text-xl font-semibold dark:text-gray-200">{user?.FirstName} {user?.LastName}</p>
+                    <p className="text-base font-semibold text-gray-500 dark:text-gray-400">{user?.Email}</p>
                 </div>
             </div>
             <div>

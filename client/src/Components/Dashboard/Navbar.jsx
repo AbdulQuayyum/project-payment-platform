@@ -16,14 +16,14 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
         >
             <span
                 style={{ background: dotColor }}
-                className="absolute inline-flex w-2 h-2 rounded-full right-3 top-3"
+                className="absolute inline-flex w-2 h-2 rounded-full right-4 top-3"
             />
             {icon}
         </button>
     </div>
 );
 
-const DashboardNavbar = () => {
+const DashboardNavbar = ({ user }) => {
     const { activeMenu, setActiveMenu, handleClick, isClicked, setScreenSize, screenSize } = UseStateContext();
 
     useEffect(() => {
@@ -67,16 +67,17 @@ const DashboardNavbar = () => {
                         <div className="flex items-center gap-x-2">
                             < FaRegUser className="w-8 h-8" />
                             <div className="flex flex-col">
-                                <span className="font-extrabold text-[#aaa] text-[20px]">
-                                    Ayinla
+                                <span className="font-extrabold text-[#aaa]">
+                                    {user?.FirstName}
                                 </span>
+                                <span className="text-[#aaa]">{user?.Email}</span>
                             </div>
 
                         </div>
                     </div>
                 </div>
                 {isClicked.notification && <Notification />}
-                {isClicked.userProfile && <UserProfile />}
+                {isClicked.userProfile && <UserProfile user={user} />}
             </div>
         </div>
     )

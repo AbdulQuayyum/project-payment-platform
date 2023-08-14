@@ -1,15 +1,16 @@
 import React from 'react'
 import { Routes, Route } from "react-router-dom";
 
+import { ProtectedRoutes, PublicRoutes } from "./Index"
 import { Home, Login, Register, DashboardHome } from '../Views/Index';
 
 const MainRoutes = () => {
     return (
         <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/Dashboard' element={<DashboardHome />} />
-            <Route path='/Login' element={<Login />} />
-            <Route path='/Register' element={<Register />} />
+            <Route path='/Login' element={<PublicRoutes><Login /></PublicRoutes>} />
+            <Route path='/Register' element={<PublicRoutes><Register /></PublicRoutes>} />
+            <Route path='/Dashboard' element={<ProtectedRoutes><DashboardHome /></ProtectedRoutes>} />
         </Routes>
     )
 }

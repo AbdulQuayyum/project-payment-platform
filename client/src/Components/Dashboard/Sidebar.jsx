@@ -9,7 +9,7 @@ import { CgLogOut } from "react-icons/cg"
 import Logo from "/logo.png"
 import { UseStateContext } from "../../Contexts/DashboardContext"
 
-const Sidebar = () => {
+const Sidebar = ({ user }) => {
   const { activeMenu, setActiveMenu, screenSize } = UseStateContext();
 
   const HandleCloseSideBar = () => {
@@ -56,14 +56,17 @@ const Sidebar = () => {
                   <RxDashboard size={22} className="ml-4" />
                   <span className="py-2 mx-4 text-lg font-semibold">Home</span>
                 </NavLink>
-                <NavLink
-                  to="/a"
-                  onClick={HandleCloseSideBar}
-                  className={({ isActive }) => (isActive ? activeLink : normalLink)}
-                >
-                  <PiUserList size={22} className="ml-4" />
-                  <span className="py-2 mx-4 text-lg font-semibold">Users</span>
-                </NavLink>
+                {user?.IsAdmin ? (
+                  <NavLink
+                    to="/a"
+                    onClick={HandleCloseSideBar}
+                    className={({ isActive }) => (isActive ? activeLink : normalLink)}
+                  >
+                    <PiUserList size={22} className="ml-4" />
+                    <span className="py-2 mx-4 text-lg font-semibold">Users</span>
+                  </NavLink>
+                ) : <></>
+                }
                 <NavLink
                   to="/B"
                   onClick={HandleCloseSideBar}
@@ -92,7 +95,7 @@ const Sidebar = () => {
               <div className="mb-10 sm:mb-0">
                 <NavLink
                   to="/Login"
-                  onClick={HandleCloseSideBar}
+                  onClick={() => { localStorage.removeItem("Token") }}
                   className={({ isActive }) => (isActive ? activeLink : normalLink)}
                 >
                   <CgLogOut size={22} className="ml-4" />

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Toaster } from 'react-hot-toast';
-import MainRoutes from './Routes/Main.Routes';
+import { MainRoutes } from "./Routes/Index"
 
 const App = () => {
   return (
