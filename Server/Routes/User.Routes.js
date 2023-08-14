@@ -75,18 +75,24 @@ router.post("/Login", async (req, res) => {
 // Get User's Information
 router.post("/GetUserInformation", AuthMiddleware, async (req, res) => {
     try {
-        const NewUser = await User.findById(req.params.UserID)
+        const NewUser = await User.findById(req.body.UserID)
         NewUser.Password = "****"
-        res.send({
+        if (!NewUser) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
+        return res.status(200).json({
             message: "User Information fetched successfully",
             data: NewUser,
             success: true
-        })
+        });
     } catch (error) {
-        res.send({
+        return res.status(500).json({
             message: error.message,
             success: false
-        })
+        });
     }
 })
 
