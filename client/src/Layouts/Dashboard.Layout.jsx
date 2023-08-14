@@ -4,8 +4,8 @@ import { useLocation } from "react-router-dom";
 import { DashboardNavbar, Sidebar } from "../Components/Index";
 import { UseStateContext } from "../Contexts/DashboardContext";
 
-export const DashboardLayout = (props) => {
-    const { children } = props;
+export const DashboardLayout = ({ children }) => {
+    // const { children } = props;
     const location = useLocation();
     const { activeMenu } = UseStateContext();
 
