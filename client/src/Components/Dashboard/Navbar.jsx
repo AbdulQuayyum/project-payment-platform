@@ -70,7 +70,6 @@ const DashboardNavbar = ({ user }) => {
                                 <span className="font-extrabold text-[#aaa]">
                                     {user?.FirstName}
                                 </span>
-                                <span className="text-[#aaa]">{user?.Email}</span>
                             </div>
 
                         </div>
