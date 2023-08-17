@@ -33,11 +33,12 @@ const Login = () => {
             if (response.success) {
                 localStorage.setItem("Token", response.data)
                 toast.success(response.message, { duration: 2000, position: 'top-right' })
-                async function nextPage() {
-                    await delay(2000)
-                    navigate("/Dashboard")
-                }
-                nextPage()
+                navigate("/Dashboard")
+                // async function nextPage() {
+                //     await delay(2000)
+                //     navigate("/Dashboard")
+                // }
+                // nextPage()
             } else {
                 toast.error(response.message, { duration: 4000, position: 'top-right' })
             }
