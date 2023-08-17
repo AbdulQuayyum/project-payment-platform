@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import toast from 'react-hot-toast';
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { LuCopy } from "react-icons/lu"
 
+import { PageTitle } from '../../Components/Index';
+
 const DashboardHome = () => {
   const { user } = useSelector((state) => state.users)
-  const dispatch = useDispatch()
 
   return (
     <div className='flex flex-col'>
       <div className="container p-6 mx-auto">
+        <PageTitle Title={"Overview"} />
         <div className='my-4'>
           <span className='font-extrabold text-2xl md:text-[40px] text-[#aaa]'>Welcome back, {user?.FirstName}</span>
         </div>

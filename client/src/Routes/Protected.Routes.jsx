@@ -13,13 +13,22 @@ const ProtectedRoutes = (props) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { children } = props
+    const delay = ms => new Promise(
+        resolve => setTimeout(resolve, ms)
+    )
 
     const GetData = async () => {
         try {
             const response = await GetUserInformation()
             if (response.success) {
-                // setUserData(response.data)
                 dispatch(setUser(response.data))
+            }
+            else if (response.message === "jwt malformed") {
+                async function nextPage() {
+                    await delay(2000)
+                    window.location.reload()
+                }
+                nextPage()
             } else {
                 toast.error(response.message, { duration: 4000, position: 'top-right' })
                 navigate("/Login")
@@ -31,7 +40,7 @@ const ProtectedRoutes = (props) => {
     }
 
     useEffect(() => {
-        if (localStorage.getItem("Token")) {
+        if (localStorage.getItem("Token") !== null) {
             if (!user) {
                 GetData()
             }
