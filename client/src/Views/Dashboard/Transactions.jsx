@@ -34,8 +34,8 @@ const Transactions = () => {
             <div className="container p-6 mx-auto">
                 <PageTitle Title={"Transactions"} />
                 <div className='flex flex-col gap-y-6'>
-                    <div className='flex px-10 py-2 bg-white border border-white rounded-2xl'>
-                        <div className="w-full max-w-lg px-4">
+                    <div className='flex justify-between px-10 py-2 bg-white border border-white rounded-2xl'>
+                        <div className="w-full max-w-sm px-4">
                             <div className="relative">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +53,7 @@ const Transactions = () => {
                                 </svg>
                                 <input
                                     type="text"
-                                    placeholder="Search"
+                                    placeholder="Search transaction"
                                     className="w-full py-3 pl-12 pr-4 text-gray-500 border rounded-md outline-none bg-gray-50 focus:bg-white focus:border-[#aaa]"
                                 />
                             </div>
@@ -66,12 +66,70 @@ const Transactions = () => {
                                 options={options}
                                 placeholder='Select...' />
                         </div>
-                        <div>
-
+                        <div className='flex gap-x-4'>
+                            <button
+                                className='w-full px-8 py-3 text-sm text-white transition-all bg-black border border-black rounded-full hover:bg-white hover:text-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white'>
+                                Deposit
+                            </button>
+                            <button
+                                className='w-full px-8 py-3 text-sm text-black transition-all bg-white border border-black rounded-full hover:text-white hover:bg-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white'>
+                                Transfer
+                            </button>
                         </div>
                     </div>
-                    <div className='flex px-10 py-5 bg-white border border-white rounded-2xl'>
-
+                    <div className='relative flex px-10 py-5 overflow-x-auto bg-white border border-white shadow-md rounded-2xl'>
+                        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" className="px-6 py-3">
+                                        Date
+                                    </th>
+                                    <th scope="col" className="px-6 py-3">
+                                        Transaction ID
+                                    </th>
+                                    <th scope="col" className="px-6 py-3">
+                                        Amount
+                                    </th>
+                                    <th scope="col" className="px-6 py-3">
+                                        Type
+                                    </th>
+                                    <th scope="col" className="px-6 py-3">
+                                        Reference Account
+                                    </th>
+                                    <th scope="col" className="px-6 py-3">
+                                        Reference
+                                    </th>
+                                    <th scope="col" className="px-6 py-3">
+                                        Status
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <td className="px-6 py-4">
+                                        Blah Blah Blah
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        Blah Blah Blah
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        Blah Blah Blah
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        Blah Blah Blah
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        Blah Blah Blah
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        Blah Blah Blah
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        Blah Blah Blah
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
