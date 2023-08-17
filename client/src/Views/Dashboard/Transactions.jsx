@@ -84,18 +84,18 @@ const Transactions = () => {
                                     <th scope="col" className="px-6 py-3">
                                         Date
                                     </th>
-                                    <th scope="col" className="px-6 py-3">
+                                    {/* <th scope="col" className="px-6 py-3">
                                         Transaction ID
-                                    </th>
+                                    </th> */}
                                     <th scope="col" className="px-6 py-3">
                                         Amount
                                     </th>
                                     <th scope="col" className="px-6 py-3">
                                         Type
                                     </th>
-                                    <th scope="col" className="px-6 py-3">
+                                    {/* <th scope="col" className="px-6 py-3">
                                         Reference Account
-                                    </th>
+                                    </th> */}
                                     <th scope="col" className="px-6 py-3">
                                         Reference
                                     </th>
@@ -106,12 +106,12 @@ const Transactions = () => {
                             </thead>
                             <tbody>
                                 <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <td className="px-6 py-4">
+                                    {/* <td className="px-6 py-4">
                                         Blah Blah Blah
                                     </td>
                                     <td className="px-6 py-4">
                                         Blah Blah Blah
-                                    </td>
+                                    </td> */}
                                     <td className="px-6 py-4">
                                         Blah Blah Blah
                                     </td>
