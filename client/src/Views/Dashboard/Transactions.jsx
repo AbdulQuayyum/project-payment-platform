@@ -4,10 +4,11 @@ import Select from 'react-select'
 import toast from 'react-hot-toast';
 import { CgSearch } from "react-icons/cg"
 
-import { PageTitle } from '../../Components/Index';
+import { PageTitle, TransferFundsModal } from '../../Components/Index';
 
 const Transactions = () => {
     const { user } = useSelector((state) => state.users)
+    const [showTransaferFundsModal, setShowTransaferFundsModal] = useState(false)
     const options = [
         { value: 'Pending', label: 'Pending' },
         { value: 'Successful', label: 'Successful' },
@@ -72,6 +73,7 @@ const Transactions = () => {
                                 Deposit
                             </button>
                             <button
+                                onClick={() => setShowTransaferFundsModal(true)}
                                 className='w-full px-8 py-3 text-sm text-black transition-all bg-white border border-black rounded-full hover:text-white hover:bg-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white'>
                                 Transfer
                             </button>
@@ -133,6 +135,7 @@ const Transactions = () => {
                     </div>
                 </div>
             </div>
+            {showTransaferFundsModal && <TransferFundsModal showTransaferFundsModal={showTransaferFundsModal} setShowTransaferFundsModal={setShowTransaferFundsModal} />}
         </div>
     )
 }
