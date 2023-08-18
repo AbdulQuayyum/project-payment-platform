@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { MdCloseFullscreen } from "react-icons/md"
 
 const TransferFundsModal = ({ showTransaferFundsModal, setShowTransaferFundsModal, ReloadData }) => {
+    const [receiver, setReceiver] = useState()
+    const [amount, setAmount] = useState()
+    const [description, setDescription] = useState()
+    const [isVerified, setIsVerified] = useState(false)
+
+    const VerifyAccount = async () => { }
 
     return (
         <div className={showTransaferFundsModal ? "services-modal active-modal" : "services-modal"}>
@@ -12,30 +18,38 @@ const TransferFundsModal = ({ showTransaferFundsModal, setShowTransaferFundsModa
                         <span className='font-extrabold  text-[#aaa]'>Amount</span>
                         <input
                             type="number"
-                            // value={email}
-                            // onChange={(e) => setEmail(e.target.value)}
+                            value={amount}
+                            onChange={(e) => setAmount(e.target.value)}
                             placeholder="Amount you want to transfer"
-                            className="w-full p-2 text-lg transition-all duration-500 border-2 border-gray-200 outline-none rounded-xl dark:bg-transparent dark:border-2 dark:rounded-lg dark:border-white"
+                            className="w-full p-2 text-lg transition-all duration-500 border-[2px] border-gray-100 outline-none rounded-xl dark:bg-transparent dark:border-[2px] dark:rounded1lg dark:border-white"
                         />
                     </div>
                     <div className='my-4'>
                         <span className='font-extrabold  text-[#aaa]'>Account number</span>
                         <input
                             type="tel"
-                            // value={email}
-                            // onChange={(e) => setEmail(e.target.value)}
+                            value={receiver}
+                            onChange={(e) => {
+                                setReceiver(e.target.value)
+                                VerifyAccount()
+                            }}
                             placeholder="Account you want to send to"
-                            className="w-full p-2 text-lg transition-all duration-500 border-2 border-gray-200 outline-none rounded-xl dark:bg-transparent dark:border-2 dark:rounded-lg dark:border-white"
+                            className="w-full p-2 text-lg transition-all duration-500 border-[2px] border-gray-100 outline-none rounded-xl dark:bg-transparent dark:border-[2px] dark:rounded1lg dark:border-white"
                         />
+                        {isVerified && (
+                            <div>
+                                <span className='text-sm text-green-600'>Account verfiied</span>
+                            </div>
+                        )}
                     </div>
                     <div className='my-4'>
                         <span className='font-extrabold  text-[#aaa]'>Description</span>
                         <input
                             type="text"
-                            // value={email}
-                            // onChange={(e) => setEmail(e.target.value)}
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
                             placeholder="Transfer description"
-                            className="w-full p-2 text-lg transition-all duration-500 border-2 border-gray-200 outline-none rounded-xl dark:bg-transparent dark:border-2 dark:rounded-lg dark:border-white"
+                            className="w-full p-2 text-lg transition-all duration-500 border-[2px] border-gray-100 outline-none rounded-xl dark:bg-transparent dark:border-[2px] dark:rounded1lg dark:border-white"
                         />
                     </div>
                     <div className='flex justify-end gap-x-4'>
