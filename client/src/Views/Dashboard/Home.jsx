@@ -26,10 +26,10 @@ const DashboardHome = () => {
               <div className='flex flex-col justify-between min-[500px]:flex-row'>
                 <span className='text-[#aaa] font-extrabold'>Account Number:</span>
                 <div className='flex items-center gap-x-2'>
-                  <span className='text-[#aaa]'>{user?.Account || "000000000"}</span>
+                  <span className='text-[#aaa]'>{user?._id}</span>
                   <CopyToClipboard
                     onCopy={() => { toast.success("Account Number copied successfully", { duration: 2000, position: 'top-right' }) }}
-                    className="cursor-pointer" text={user?.Account || "000000000"}>
+                    className="cursor-pointer" text={user?._id}>
                     <LuCopy color='#aaa' />
                   </CopyToClipboard>
                 </div>

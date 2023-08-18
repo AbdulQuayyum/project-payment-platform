@@ -107,18 +107,18 @@ const Transactions = () => {
                                     <th scope="col" className="px-6 py-3">
                                         Date
                                     </th>
-                                    {/* <th scope="col" className="px-6 py-3">
+                                    <th scope="col" className="px-6 py-3">
                                         Transaction ID
-                                    </th> */}
+                                    </th>
                                     <th scope="col" className="px-6 py-3">
                                         Amount
                                     </th>
                                     <th scope="col" className="px-6 py-3">
                                         Type
                                     </th>
-                                    {/* <th scope="col" className="px-6 py-3">
+                                    <th scope="col" className="px-6 py-3">
                                         Reference Account
-                                    </th> */}
+                                    </th>
                                     <th scope="col" className="px-6 py-3">
                                         Reference
                                     </th>
@@ -137,21 +137,27 @@ const Transactions = () => {
                                         Blah Blah Blah
                                     </td> */}
                                         <td className="px-6 py-4">
-                                        {moment(items.createdAt).format('MMMM Do YYYY, h:mm:ss a')} {/* Format createdAt date */}
+                                            {moment(items.createdAt).format('MMMM Do YYYY, h:mm:ss a')} {/* Format createdAt date */}
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            {items._id}
                                         </td>
                                         <td className="px-6 py-4">
                                             {items.Amount}
                                         </td>
                                         <td className="px-6 py-4">
-                                            Blah Blah Blah
+                                            {items.Sender === user._id ? "Debit" : "Credit"}
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            {items.Sender === user._id ? items.Receiver : items.Sender}
                                         </td>
                                         <td className="px-6 py-4">
                                             {items.Reference}
                                         </td>
                                         <td className="px-6 py-4">
-                                            <span className={ items.Status === "Success" ? "text-green-800 bg-green-50 py-[2px] px-4 rounded-2xl" : "text-red-800 bg-red-50 py-[2px] px-4 rounded-2xl"}>
+                                            <span className={items.Status === "Success" ? "text-green-800 bg-green-50 py-[2px] px-4 rounded-2xl" : "text-red-800 bg-red-50 py-[2px] px-4 rounded-2xl"}>
 
-                                            {items.Status}
+                                                {items.Status}
                                             </span>
                                         </td>
                                     </tr>
