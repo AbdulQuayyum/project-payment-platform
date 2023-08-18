@@ -14,12 +14,12 @@ router.post("/TransferFunds", AuthMiddleware, async (req, res) => {
 
         // Decrease the Sender's balance
         await User.findByIdAndUpdate(req.body.Sender, {
-            $inc: { balance: -req.body.Amount }
+            $inc: { Balance: -req.body.Amount }
         })
 
         // Increase the Receiver's balance
         await User.findByIdAndUpdate(req.body.Receiver, {
-            $inc: { amount: req.body.Amount }
+            $inc: { Amount: req.body.Amount }
         })
 
         res.send({

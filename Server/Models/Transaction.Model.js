@@ -15,10 +15,10 @@ const TransactionSchema = new mongoose.Schema({
         ref: "Users",
         required: true,
     },
-    Type: {
-        type: String,
-        required: true,
-    },
+    // Type: {
+    //     type: String,
+    //     required: true,
+    // },
     Reference: {
         type: String,
         required: true,
