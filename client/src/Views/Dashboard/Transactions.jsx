@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import Select from 'react-select'
 import toast from 'react-hot-toast';
 import { CgSearch } from "react-icons/cg"
+import moment from "moment"
 
 import { PageTitle, TransferFundsModal } from '../../Components/Index';
+import { GetAllTransactionsByUser } from '../../APIs/Transactions.Api';
 
 const Transactions = () => {
     const { user } = useSelector((state) => state.users)
+    const [data = [], setData] = useState([])
     const [showTransaferFundsModal, setShowTransaferFundsModal] = useState(false)
+    const dispatch = useDispatch()
     const options = [
         { value: 'Pending', label: 'Pending' },
         { value: 'Successful', label: 'Successful' },
@@ -29,6 +33,23 @@ const Transactions = () => {
             padding: "0px 2px"
         })
     };
+
+    const GetData = async () => {
+        try {
+            const response = await GetAllTransactionsByUser()
+            if (response.success) {
+                setData(response.data)
+            }
+        } catch (error) {
+
+            toast.error(error.message, { duration: 4000, position: 'top-right' })
+        }
+    }
+
+    useEffect(() => {
+        GetData()
+    }, [])
+
 
     return (
         <div className='flex flex-col'>
@@ -86,18 +107,18 @@ const Transactions = () => {
                                     <th scope="col" className="px-6 py-3">
                                         Date
                                     </th>
-                                    {/* <th scope="col" className="px-6 py-3">
+                                    <th scope="col" className="px-6 py-3">
                                         Transaction ID
-                                    </th> */}
+                                    </th>
                                     <th scope="col" className="px-6 py-3">
                                         Amount
                                     </th>
                                     <th scope="col" className="px-6 py-3">
                                         Type
                                     </th>
-                                    {/* <th scope="col" className="px-6 py-3">
+                                    <th scope="col" className="px-6 py-3">
                                         Reference Account
-                                    </th> */}
+                                    </th>
                                     <th scope="col" className="px-6 py-3">
                                         Reference
                                     </th>
@@ -107,29 +128,40 @@ const Transactions = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    {/* <td className="px-6 py-4">
+                                {data?.map((items, index) => (
+                                    <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        {/* <td className="px-6 py-4">
                                         Blah Blah Blah
                                     </td>
                                     <td className="px-6 py-4">
                                         Blah Blah Blah
                                     </td> */}
-                                    <td className="px-6 py-4">
-                                        Blah Blah Blah
-                                    </td>
-                                    <td className="px-6 py-4">
-                                        Blah Blah Blah
-                                    </td>
-                                    <td className="px-6 py-4">
-                                        Blah Blah Blah
-                                    </td>
-                                    <td className="px-6 py-4">
-                                        Blah Blah Blah
-                                    </td>
-                                    <td className="px-6 py-4">
-                                        Blah Blah Blah
-                                    </td>
-                                </tr>
+                                        <td className="px-6 py-4">
+                                            {moment(items.createdAt).format('MMMM Do YYYY, h:mm:ss a')} {/* Format createdAt date */}
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            {items._id}
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            {items.Amount}
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            {items.Sender._id === user._id ? "Debit" : "Credit"}
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            {items.Sender._id === user._id ? <><span>{items.Receiver.FirstName} {items.Receiver.LastName}</span></> : <><span>{items.Sender.FirstName} {items.Sender.LastName}</span></>}
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            {items.Reference}
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <span className={items.Status === "Success" ? "text-green-800 bg-green-50 py-[2px] px-4 rounded-2xl" : "text-red-800 bg-red-50 py-[2px] px-4 rounded-2xl"}>
+
+                                                {items.Status}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>

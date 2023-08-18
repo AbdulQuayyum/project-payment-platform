@@ -14,12 +14,12 @@ router.post("/TransferFunds", AuthMiddleware, async (req, res) => {
 
         // Decrease the Sender's balance
         await User.findByIdAndUpdate(req.body.Sender, {
-            $inc: { balance: -req.body.Amount }
+            $inc: { Balance: -req.body.Amount }
         })
 
         // Increase the Receiver's balance
         await User.findByIdAndUpdate(req.body.Receiver, {
-            $inc: { amount: req.body.Amount }
+            $inc: { Amount: req.body.Amount }
         })
 
         res.send({
@@ -56,6 +56,26 @@ router.post("/VerifyAccount", AuthMiddleware, async (req, res) => {
     } catch (error) {
         res.send({
             message: "Account was not found",
+            data: error.message,
+            success: false
+        })
+    }
+})
+
+// Get all transactions for a user
+router.post("/GetAllTransactionsByUser", AuthMiddleware, async (req, res) => {
+    try {
+        const NewTransaction = await Transaction.find({
+            $or: [{ Sender: req.body.UserID }, { Receiver: req.body.UserID }]
+        }).sort({ createdAt: -1 }).populate("Sender").populate("Receiver")
+        res.send({
+            message: 'Transactions fetched successfully',
+            data: NewTransaction,
+            success: true
+        })
+    } catch (error) {
+        res.send({
+            message: "Error in fetching Transactions",
             data: error.message,
             success: false
         })
