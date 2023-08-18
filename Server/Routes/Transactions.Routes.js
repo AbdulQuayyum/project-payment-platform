@@ -62,4 +62,24 @@ router.post("/VerifyAccount", AuthMiddleware, async (req, res) => {
     }
 })
 
+// Get all transactions for a user
+router.post("/GetAllTransactionsByUser", AuthMiddleware, async (req, res) => {
+    try {
+        const NewTransaction = await Transaction.find({
+            $or: [{ Sender: req.body.UserID }, { Receiver: req.body.UserID }]
+        })
+        res.send({
+            message: 'Transactions fetched successfully',
+            data: NewTransaction,
+            success: true
+        })
+    } catch (error) {
+        res.send({
+            message: "Error in fetching Transactions",
+            data: error.message,
+            success: false
+        })
+    }
+})
+
 module.exports = router
