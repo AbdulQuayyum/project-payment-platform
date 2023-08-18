@@ -8,6 +8,7 @@ import { PageTitle, TransferFundsModal } from '../../Components/Index';
 
 const Transactions = () => {
     const { user } = useSelector((state) => state.users)
+    const [data = [], setData] = useState([])
     const [showTransaferFundsModal, setShowTransaferFundsModal] = useState(false)
     const options = [
         { value: 'Pending', label: 'Pending' },
@@ -29,6 +30,8 @@ const Transactions = () => {
             padding: "0px 2px"
         })
     };
+
+    const GetData = async () => { }
 
     return (
         <div className='flex flex-col'>

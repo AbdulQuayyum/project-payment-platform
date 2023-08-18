@@ -19,3 +19,13 @@ export const TransferFunds = async (payload) => {
         return error.response.data
     }
 }
+
+// Get All Transactions for a user
+export const GetAllTransactionsByUser = async () => {
+    try {
+        const { data } = await AxiosInstance.post(`${import.meta.env.VITE_SERVER_URL}/v1/Transactions/GetAllTransactionsByUser`)
+        return data
+    } catch (error) {
+        return error.response.data
+    }
+}
