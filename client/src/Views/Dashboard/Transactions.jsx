@@ -146,10 +146,10 @@ const Transactions = () => {
                                             {items.Amount}
                                         </td>
                                         <td className="px-6 py-4">
-                                            {items.Sender === user._id ? "Debit" : "Credit"}
+                                            {items.Sender._id === user._id ? "Debit" : "Credit"}
                                         </td>
                                         <td className="px-6 py-4">
-                                            {items.Sender === user._id ? items.Receiver : items.Sender}
+                                            {items.Sender._id === user._id ? <><span>{items.Receiver.FirstName} {items.Receiver.LastName}</span></> : <><span>{items.Sender.FirstName} {items.Sender.LastName}</span></>}
                                         </td>
                                         <td className="px-6 py-4">
                                             {items.Reference}

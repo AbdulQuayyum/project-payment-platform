@@ -67,7 +67,7 @@ router.post("/GetAllTransactionsByUser", AuthMiddleware, async (req, res) => {
     try {
         const NewTransaction = await Transaction.find({
             $or: [{ Sender: req.body.UserID }, { Receiver: req.body.UserID }]
-        })
+        }).sort({ createdAt: -1 }).populate("Sender").populate("Receiver")
         res.send({
             message: 'Transactions fetched successfully',
             data: NewTransaction,
