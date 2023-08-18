@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import Select from 'react-select'
 import toast from 'react-hot-toast';
 import { CgSearch } from "react-icons/cg"
+import moment from "moment"
 
 import { PageTitle, TransferFundsModal } from '../../Components/Index';
 import { GetAllTransactionsByUser } from '../../APIs/Transactions.Api';
@@ -136,7 +137,7 @@ const Transactions = () => {
                                         Blah Blah Blah
                                     </td> */}
                                         <td className="px-6 py-4">
-                                            {items.createdAt}
+                                        {moment(items.createdAt).format('MMMM Do YYYY, h:mm:ss a')} {/* Format createdAt date */}
                                         </td>
                                         <td className="px-6 py-4">
                                             {items.Amount}
