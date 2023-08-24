@@ -8,7 +8,7 @@ const User = require("../Models/User.Model")
 router.post("/GetAllRequestsByUser", AuthMiddleware, async (req, res) => {
     try {
         const NewRequests = await Request.find({
-            $or: [{ Sender: req.User._id }, { Receiver: req.User._id }]
+            $or: [{ Sender: req.body.UserID }, { Receiver: req.body.UserID }]
         })
             .populate("Sender")
             .populate("Receiver")
