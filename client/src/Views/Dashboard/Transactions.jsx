@@ -5,13 +5,14 @@ import toast from 'react-hot-toast';
 import { CgSearch } from "react-icons/cg"
 import moment from "moment"
 
-import { PageTitle, TransferFundsModal } from '../../Components/Index';
+import { PageTitle, DepositModal, TransferFundsModal } from '../../Components/Index';
 import { GetAllTransactionsByUser } from '../../APIs/Transactions.Api';
 
 const Transactions = () => {
     const { user } = useSelector((state) => state.users)
     const [data = [], setData] = useState([])
     const [showTransaferFundsModal, setShowTransaferFundsModal] = useState(false)
+    const [showDepositModal, setShowDepositModal] = useState(false)
     const dispatch = useDispatch()
     const options = [
         { value: 'Pending', label: 'Pending' },
@@ -90,6 +91,7 @@ const Transactions = () => {
                         </div>
                         <div className='flex gap-x-4'>
                             <button
+                                onClick={() => setShowDepositModal(true)}
                                 className='w-full px-8 py-3 text-sm text-white transition-all bg-black border border-black rounded-full hover:bg-white hover:text-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white'>
                                 Deposit
                             </button>
@@ -168,6 +170,7 @@ const Transactions = () => {
                 </div>
             </div>
             {showTransaferFundsModal && <TransferFundsModal showTransaferFundsModal={showTransaferFundsModal} setShowTransaferFundsModal={setShowTransaferFundsModal} />}
+            {showDepositModal && <DepositModal showDepositModal={showDepositModal} setShowDepositModal={setShowDepositModal} />}
         </div>
     )
 }
