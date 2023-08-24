@@ -5,7 +5,7 @@ const Requests = require("../Models/Requests.Model")
 const User = require("../Models/User.Model")
 
 // Get all requests for a user
-router.post("/GetAllRequestsByUser", async (req, res) => {
+router.post("/GetAllRequestsByUser", AuthMiddleware, async (req, res) => {
     try {
         const NewRequests = await Requests.find({
             $or: [{ Sender: req.User._id }, { Receiver: req.User._id }]
@@ -24,7 +24,7 @@ router.post("/GetAllRequestsByUser", async (req, res) => {
 })
 
 // Send request to another user 
-router.post("/SendRequest", async (req, res) => {
+router.post("/SendRequest", AuthMiddleware, async (req, res) => {
     try {
         const { Receiver, Amount, Reference } = req.body
         const NewRequest = new Request({ Sender: req.User._id, Receiver: Receiver, Amount: Amount, Reference: Reference })
