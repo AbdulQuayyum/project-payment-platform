@@ -29,6 +29,20 @@ body {
     z-index: 10000;
 }
 
+.onboard {
+    min-height: calc(100vh - 244px);
+    justify-content: center;
+
+}
+
+@media (max-width: 1024px) {
+    .onboard {
+        min-height: 100%;
+        margin-top: 1rem;
+        margin-bottom: 4rem;
+    }
+}
+
 .transfer-modal,
 .deposit-modal {
     position: fixed;
