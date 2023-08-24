@@ -1,13 +1,13 @@
 const router = require("express").Router()
 
 const AuthMiddleware = require("../Middlewares/Auth.Middleware")
-const Requests = require("../Models/Requests.Model")
+const Request = require("../Models/Requests.Model")
 const User = require("../Models/User.Model")
 
 // Get all requests for a user
 router.post("/GetAllRequestsByUser", AuthMiddleware, async (req, res) => {
     try {
-        const NewRequests = await Requests.find({
+        const NewRequests = await Request.find({
             $or: [{ Sender: req.User._id }, { Receiver: req.User._id }]
         })
             .populate("Sender")
@@ -27,7 +27,7 @@ router.post("/GetAllRequestsByUser", AuthMiddleware, async (req, res) => {
 router.post("/SendRequest", AuthMiddleware, async (req, res) => {
     try {
         const { Receiver, Amount, Reference } = req.body
-        const NewRequest = new Request({ Sender: req.User._id, Receiver: Receiver, Amount: Amount, Reference: Reference })
+        const NewRequest = new Request({ Sender: req.body.UserID, Receiver, Amount, Reference })
 
         await NewRequest.save()
 
