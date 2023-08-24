@@ -3,6 +3,7 @@ const router = require("express").Router()
 const AuthMiddleware = require("../Middlewares/Auth.Middleware")
 const Request = require("../Models/Requests.Model")
 const User = require("../Models/User.Model")
+const Transaction = require("../Models/Transaction.Model")
 
 // Get all requests for a user
 router.post("/GetAllRequestsByUser", AuthMiddleware, async (req, res) => {
@@ -44,7 +45,17 @@ router.post("/SendRequest", AuthMiddleware, async (req, res) => {
 // Update a request status
 router.post("/UpdateRequestStatus", AuthMiddleware, async (req, res) => {
     try {
-        if (req.body.Status === "Accepted") {
+        if (req.body.Status === "Accept") {
+
+            // Create a transaction
+            const NewTransaction = new Transaction({
+                Sender: req.body.Receiver._id,
+                Receiver: req.body.Sender._id,
+                Amount: req.body.Amount,
+                Reference: req.body.Reference,
+                status: "Accept"
+            })
+            await NewTransaction.save()
 
             // Deduct the amount from the sender
             await User.findByIdAndUpdate(req.body.Sender._id, {
