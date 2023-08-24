@@ -76,7 +76,7 @@ const Sidebar = ({ user }) => {
                   <span className="py-2 mx-4 text-lg font-semibold">Transactions</span>
                 </NavLink>
                 <NavLink
-                  to="/C"
+                  to="/Requests"
                   onClick={HandleCloseSideBar}
                   className={({ isActive }) => (isActive ? activeLink : normalLink)}
                 >
