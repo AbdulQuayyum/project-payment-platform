@@ -29,7 +29,8 @@ body {
     z-index: 10000;
 }
 
-.services-modal {
+.transfer-modal,
+.deposit-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -46,7 +47,8 @@ body {
     transition: .3s;
 }
 
-.services-modal-content {
+.transfer-modal-content,
+.deposit-modal-content {
     width: 500px;
     position: relative;
     background-color: #fff;
@@ -54,7 +56,8 @@ body {
     border-radius: 1.5rem;
 }
 
-.services-modal-close {
+.transfer-modal-close,
+.deposit-modal-close {
     position: absolute;
     top: 1.5rem;
     right: 1.5rem;
@@ -63,7 +66,8 @@ body {
     cursor: pointer;
 }
 
-.active-modal {
+.active-transfer-modal,
+.active-deposit-modal {
     opacity: 1;
     visibility: visible;
 }
@@ -71,7 +75,9 @@ body {
 /*=============== BREAKPOINTS ===============*/
 
 @media screen and (max-width: 576px) {
-    .services-modal-content {
+
+    .transfer-modal-content,
+    .deposit-modal-content {
         padding: 4.5rem 1.5rem 2.5rem;
     }
 }

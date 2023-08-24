@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DepositModal = () => {
+const DepositModal = ({ showDepositModal, setShowDepositModal, ReloadData }) => {
     return (
         <div>DepositModal</div>
     )

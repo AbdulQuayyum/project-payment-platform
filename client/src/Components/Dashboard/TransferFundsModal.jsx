@@ -56,9 +56,9 @@ const TransferFundsModal = ({ showTransaferFundsModal, setShowTransaferFundsModa
     }
 
     return (
-        <div className={showTransaferFundsModal ? "services-modal active-modal" : "services-modal"}>
-            <div className="services-modal-content dark:bg-[#1c1c24]">
-                < MdCloseFullscreen className='services-modal-close dark:text-[#fff]' onClick={() => setShowTransaferFundsModal(false)} />
+        <div className={showTransaferFundsModal ? "transfer-modal active-transfer-modal" : "transfer-modal"}>
+            <div className="transfer-modal-content dark:bg-[#1c1c24]">
+                < MdCloseFullscreen className='transfer-modal-close dark:text-[#fff]' onClick={() => setShowTransaferFundsModal(false)} />
                 <div>
                     <div className='my-4'>
                         <span className='font-extrabold  text-[#aaa]'>Amount</span>
