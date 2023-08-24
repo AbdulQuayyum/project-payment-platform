@@ -41,4 +41,36 @@ router.post("/SendRequest", AuthMiddleware, async (req, res) => {
     }
 })
 
+// Update a request status
+router.post("/UpdateRequestStatus", AuthMiddleware, async (req, res) => {
+    try {
+        if (req.body.Status === "Accepted") {
+
+            // Deduct the amount from the sender
+            await User.findByIdAndUpdate(req.body.Sender._id, {
+                $inc: { Balance: req.body.Amount }
+            })
+            // Add the amount to the receiver  
+            await User.findByIdAndUpdate(req.body.Receiver._id, {
+                $inc: { Balance: -req.body.Amount }
+            })
+        }
+        // Update the request status
+        await Request.findByIdAndUpdate(req.body._id, {
+            Status: req.body.Status
+        })
+        res.send({
+            data: null,
+            message: "Request status updated successfully",
+            success: true
+        })
+    } catch (error) {
+        res.send({
+            data: error,
+            message: error.message,
+            success: false
+        })
+    }
+})
+
 module.exports = router
