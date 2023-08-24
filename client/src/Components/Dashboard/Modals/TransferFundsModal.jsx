@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import toast from 'react-hot-toast';
 import { MdCloseFullscreen } from "react-icons/md"
 
-import { VerifyAccount, TransferFunds } from '../../APIs/Transactions.Api'
+import { VerifyAccount, TransferFunds } from '../../../APIs/Transactions.Api'
 
 const TransferFundsModal = ({ showTransaferFundsModal, setShowTransaferFundsModal, ReloadData }) => {
     const { user } = useSelector((state) => state.users)
@@ -23,7 +23,7 @@ const TransferFundsModal = ({ showTransaferFundsModal, setShowTransaferFundsModa
                 console.log("failed")
             }
         } catch (error) {
-
+            setIsVerified("false")
         }
     }
 
@@ -45,20 +45,23 @@ const TransferFundsModal = ({ showTransaferFundsModal, setShowTransaferFundsModa
             }
             const response = await TransferFunds(payload)
             if (response.success) {
+                ReloadData()
                 setShowTransaferFundsModal(false)
                 toast.success(response.message, { duration: 2000, position: 'top-right' })
             } else {
                 toast.error(response.message, { duration: 2000, position: 'top-right' })
+                setShowTransaferFundsModal(false)
             }
         } catch (error) {
             toast.error(error.message, { duration: 4000, position: 'top-right' })
+            setShowTransaferFundsModal(false)
         }
     }
 
     return (
-        <div className={showTransaferFundsModal ? "services-modal active-modal" : "services-modal"}>
-            <div className="services-modal-content dark:bg-[#1c1c24]">
-                < MdCloseFullscreen className='services-modal-close dark:text-[#fff]' onClick={() => setShowTransaferFundsModal(false)} />
+        <div className={showTransaferFundsModal ? "transfer-modal active-transfer-modal" : "transfer-modal"}>
+            <div className="transfer-modal-content dark:bg-[#1c1c24]">
+                < MdCloseFullscreen className='transfer-modal-close dark:text-[#fff]' onClick={() => setShowTransaferFundsModal(false)} />
                 <div>
                     <div className='my-4'>
                         <span className='font-extrabold  text-[#aaa]'>Amount</span>
