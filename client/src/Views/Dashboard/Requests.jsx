@@ -10,26 +10,35 @@ const Requests = () => {
     return (
         <div className='flex flex-col'>
             <div className="container p-6 mx-auto">
-                <PageTitle Title={"Transactions"} />
+                <PageTitle Title={"Requests"} />
                 <div>
-                    <ul className="flex mt-10 mb-4">
-                        <li>
-                            <a
-                                href="#"
-                                onClick={() => setOpenTab(1)}
-                                className={` ${openTab === 1 ? "border-[#000] border-b-2 text-[#000]" : ""} inline-block mx-6 cursor-pointer text-lg font-bold text-gray-[#aaa]`}  >
-                                Sent
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="#"
-                                onClick={() => setOpenTab(2)}
-                                className={` ${openTab === 2 ? "border-[#000] border-b-2 text-[#000]" : ""} inline-block mx-6 cursor-pointer text-lg font-bold text-gray-[#aaa]`} >
-                                Recieved
-                            </a>
-                        </li>
-                    </ul>
+                    <div className='flex gap-y-4 flex-col sm:flex-row justify-between my-5 items-center'>
+                        <ul className="flex ">
+                            <li>
+                                <a
+                                    href="#"
+                                    onClick={() => setOpenTab(1)}
+                                    className={` ${openTab === 1 ? "border-[#000] border-b-2 text-[#000]" : ""} inline-block mx-6 cursor-pointer text-lg font-bold text-gray-[#aaa]`}  >
+                                    Sent
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="#"
+                                    onClick={() => setOpenTab(2)}
+                                    className={` ${openTab === 2 ? "border-[#000] border-b-2 text-[#000]" : ""} inline-block mx-6 cursor-pointer text-lg font-bold text-gray-[#aaa]`} >
+                                    Recieved
+                                </a>
+                            </li>
+                        </ul>
+                        <div>
+                            <button
+                                // onClick={() => setShowTransaferFundsModal(true)}
+                                className='w-full px-8 py-3 text-sm text-black transition-all bg-white border border-black rounded-full hover:text-white hover:bg-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white'>
+                                Request funds
+                            </button>
+                        </div>
+                    </div>
                     <div className={openTab === 1 ? "block" : "hidden"}>
                         <div className='relative flex px-10 py-5 overflow-x-auto bg-white border border-white shadow-md rounded-2xl'>
                             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
