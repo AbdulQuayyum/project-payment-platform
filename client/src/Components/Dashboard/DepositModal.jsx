@@ -6,6 +6,21 @@ import { MdCloseFullscreen } from "react-icons/md"
 const DepositModal = ({ showDepositModal, setShowDepositModal, ReloadData }) => {
     const [amount, setAmount] = useState("")
 
+    const HandleDeposit = () => {
+        try {
+            if (!amount) {
+                toast.error("Please put an amount.", { duration: 4000, position: 'top-right' })
+                return;
+            } else {
+                toast.success("Working on This Feature.", { duration: 2000, position: 'top-right' })
+                setShowDepositModal(false)
+            }
+
+        } catch (error) {
+            toast.error(error.message, { duration: 4000, position: 'top-right' })
+        }
+    }
+
     return (
         <div className={showDepositModal ? "deposit-modal active-deposit-modal" : "deposit-modal"}>
             <div className="deposit-modal-content dark:bg-[#1c1c24]">
@@ -24,7 +39,11 @@ const DepositModal = ({ showDepositModal, setShowDepositModal, ReloadData }) => 
                 </div>
                 <div className='flex justify-end gap-x-4'>
                     <button
-                        // disabled={amount > user.Balance && isVerified && description === "" ? false : true}
+                        className='px-8 py-3 text-sm text-white transition-all bg-black border border-black rounded-full hover:bg-white hover:text-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white'>
+                        Cancel
+                    </button>
+                    <button
+                        onClick={HandleDeposit}
                         className='px-8 py-3 text-sm text-black transition-all bg-white border border-black rounded-full disabled:opacity-50 disabled:cursor-not-allowed hover:text-white hover:bg-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white'>
                         Deposit now
                     </button>
