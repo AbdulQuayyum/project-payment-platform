@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux"
 import toast from 'react-hot-toast';
 import { MdCloseFullscreen } from "react-icons/md"
 
-import { VerifyAccount, SendRequest } from '../../../APIs/Transactions.Api'
+import { SendRequest } from '../../../APIs/Request.Api'
+import { VerifyAccount } from '../../../APIs/Transactions.Api'
 
 const NewRequestModal = ({ showNewRequestModal, setShowNewRequestModal, ReloadData }) => {
     const { user } = useSelector((state) => state.users)

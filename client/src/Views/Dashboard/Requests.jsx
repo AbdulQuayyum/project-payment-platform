@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
 import toast from 'react-hot-toast';
 
-import { PageTitle } from '../../Components/Index';
+import { PageTitle, NewRequestModal } from '../../Components/Index';
 
 const Requests = () => {
     const [openTab, setOpenTab] = useState(1);
+    const [showNewRequestModal, setShowNewRequestModal] = useState(false)
 
     return (
         <div className='flex flex-col'>
@@ -33,7 +34,7 @@ const Requests = () => {
                         </ul>
                         <div>
                             <button
-                                // onClick={() => setShowTransaferFundsModal(true)}
+                                onClick={() => setShowNewRequestModal(true)}
                                 className='w-full px-8 py-3 text-sm text-black transition-all bg-white border border-black rounded-full hover:text-white hover:bg-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white'>
                                 Request funds
                             </button>
@@ -137,6 +138,7 @@ const Requests = () => {
                     </div>
                 </div>
             </div>
+            {showNewRequestModal && <NewRequestModal showNewRequestModal={showNewRequestModal} setShowNewRequestModal={setShowNewRequestModal} />}
         </div>
     )
 }
