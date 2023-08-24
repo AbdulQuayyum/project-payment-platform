@@ -31,9 +31,9 @@ const Requests = () => {
     }, [])
 
 
-    const UpdateStatus = async (Record, Status) => {
+    const UpdateStatus = async (items, Status) => {
         try {
-            const response = await UpdateRequestStatus({ ...Record, Status })
+            const response = await UpdateRequestStatus({ ...items, Status })
             if (response.success) {
                 toast.success(response.message, { duration: 2000, position: 'top-right' })
                 GetData()
@@ -111,8 +111,8 @@ const Requests = () => {
                                                 {items.Amount}
                                             </td>
                                             <td className="px-6 py-4">
-                                                <span className={items.Status === "Success" ? "text-green-800 bg-green-50 py-1 px-4 rounded-2xl" : (items.Status === "Falied" ? "text-red-800 bg-red-50 py-1 px-4 rounded-2xl" : "bg-yellow-100 text-yellow-700 py-1 px-4 rounded-2xl")}>
-                                                    {items.Status}
+                                                <span className={items.Status === "Accept" ? "text-green-800 bg-green-50 py-1 px-4 rounded-2xl" : (items.Status === "Reject" ? "text-red-800 bg-red-50 py-1 px-4 rounded-2xl" : "bg-yellow-100 text-yellow-700 py-1 px-4 rounded-2xl")}>
+                                                    {items.Status === "Accept" ? "Success" : (items.Status === "Reject" ? "Rejected" : "Pending")}
                                                 </span>
                                             </td>
                                         </tr>
@@ -158,8 +158,8 @@ const Requests = () => {
                                                 {items.Amount}
                                             </td>
                                             <td className="px-6 py-4">
-                                                <span className={items.Status === "Success" ? "text-green-800 bg-green-50 py-1 px-4 rounded-2xl" : (items.Status === "Falied" ? "text-red-800 bg-red-50 py-1 px-4 rounded-2xl" : "bg-yellow-100 text-yellow-700 py-1 px-4 rounded-2xl")}>
-                                                    {items.Status}
+                                                <span className={items.Status === "Accept" ? "text-green-800 bg-green-50 py-1 px-4 rounded-2xl" : (items.Status === "Reject" ? "text-red-800 bg-red-50 py-1 px-4 rounded-2xl" : "bg-yellow-100 text-yellow-700 py-1 px-4 rounded-2xl")}>
+                                                    {items.Status === "Accept" ? "Success" : (items.Status === "Reject" ? "Rejected" : "Pending")}
                                                 </span>
                                             </td>
                                             <td className="px-6 py-4">
@@ -167,23 +167,20 @@ const Requests = () => {
                                                     (
                                                         <div className='flex gap-x-4'>
                                                             <button
-                                                                onClick={() => UpdateStatus(Record, "Reject")}
+                                                                onClick={() => UpdateStatus(items, "Reject")}
                                                                 className='w-full px-4 py-1 text-sm text-red-500 transition-all bg-white border border-red-500 rounded-full hover:text-white hover:bg-red-500 dark:bg-white dark:text-red-500 dark:hover:bg-red-500 dark:hover:text-white'>
                                                                 Reject
                                                             </button>
 
                                                             <button
-                                                                onClick={() => UpdateStatus(Record, "Accept")}
+                                                                onClick={() => UpdateStatus(items, "Accept")}
                                                                 className='w-full px-4 py-1 text-sm text-green-500 transition-all bg-white border border-green-500 rounded-full hover:text-white hover:bg-green-500 dark:bg-white dark:text-green-500 dark:hover:bg-green-500 dark:hover:text-white'>
                                                                 Accept
                                                             </button>
                                                         </div>
                                                     ) :
                                                     (
-                                                        <button
-                                                            className='w-full px-8 py-3 text-sm text-red-500 transition-all bg-white border border-red-500 rounded-full hover:text-white hover:bg-red-500 dark:bg-white dark:text-red-500 dark:hover:bg-red-500 dark:hover:text-white'>
-                                                            Cancel
-                                                        </button>
+                                                        <></>
                                                     )}
                                             </td>
                                         </tr>
