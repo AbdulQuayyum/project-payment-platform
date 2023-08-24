@@ -51,9 +51,11 @@ const NewRequestModal = ({ showNewRequestModal, setShowNewRequestModal, ReloadDa
                 toast.success(response.message, { duration: 2000, position: 'top-right' })
             } else {
                 toast.error(response.message, { duration: 2000, position: 'top-right' })
+                setShowNewRequestModal(false)
             }
         } catch (error) {
             toast.error(error.message, { duration: 4000, position: 'top-right' })
+            setShowNewRequestModal(false)
         }
     }
 

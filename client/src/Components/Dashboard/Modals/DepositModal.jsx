@@ -18,6 +18,7 @@ const DepositModal = ({ showDepositModal, setShowDepositModal, ReloadData }) => 
 
         } catch (error) {
             toast.error(error.message, { duration: 4000, position: 'top-right' })
+            setShowDepositModal(false)
         }
     }
 
