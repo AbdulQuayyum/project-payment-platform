@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import toast from 'react-hot-toast';
 import { MdCloseFullscreen } from "react-icons/md"
 
-import { VerifyAccount, TransferFunds } from '../../APIs/Transactions.Api'
+import { VerifyAccount, TransferFunds } from '../../../APIs/Transactions.Api'
 
 const TransferFundsModal = ({ showTransaferFundsModal, setShowTransaferFundsModal, ReloadData }) => {
     const { user } = useSelector((state) => state.users)
