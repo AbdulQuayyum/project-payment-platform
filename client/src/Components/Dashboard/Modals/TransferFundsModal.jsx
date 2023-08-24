@@ -23,7 +23,7 @@ const TransferFundsModal = ({ showTransaferFundsModal, setShowTransaferFundsModa
                 console.log("failed")
             }
         } catch (error) {
-
+            setIsVerified("false")
         }
     }
 
@@ -45,6 +45,7 @@ const TransferFundsModal = ({ showTransaferFundsModal, setShowTransaferFundsModa
             }
             const response = await TransferFunds(payload)
             if (response.success) {
+                ReloadData()
                 setShowTransaferFundsModal(false)
                 toast.success(response.message, { duration: 2000, position: 'top-right' })
             } else {
