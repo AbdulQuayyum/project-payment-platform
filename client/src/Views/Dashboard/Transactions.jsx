@@ -58,7 +58,7 @@ const Transactions = () => {
                 <PageTitle Title={"Transactions"} />
                 <div className='flex flex-col gap-y-6'>
                     <div className='flex justify-between px-10 py-2 bg-white border border-white rounded-2xl'>
-                        <div className="relative flex items-center">
+                        <div className="flex items-center">
                             <input className="h-10 p-6 w-full sm:w-[500px] px-5 text-base bg-white border-1 border border-[#BDBDBD] rounded-2xl focus:outline-none"
                                 type="search" name="search" placeholder="Search" />
                             <button type="submit" className="absolute right-0 mr-4">
@@ -86,7 +86,7 @@ const Transactions = () => {
                             </button>
                         </div>
                     </div>
-                    <div className='relative flex px-10 py-5 overflow-x-auto bg-white border border-white shadow-md rounded-2xl'>
+                    <div className='flex px-10 py-5 overflow-x-auto bg-white border border-white shadow-md rounded-2xl'>
                         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>

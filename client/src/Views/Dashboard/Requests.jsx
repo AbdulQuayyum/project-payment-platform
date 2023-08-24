@@ -1,12 +1,35 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from "react-redux"
 import Select from 'react-select'
 import toast from 'react-hot-toast';
 
 import { PageTitle, NewRequestModal } from '../../Components/Index';
+import { GetAllRequestsByUser } from "../../APIs/Request.Api"
 
 const Requests = () => {
+    const { user } = useSelector((state) => state.users)
+    const [data = [], setData] = useState([])
     const [openTab, setOpenTab] = useState(1);
     const [showNewRequestModal, setShowNewRequestModal] = useState(false)
+    const dispatch = useDispatch()
+
+    const GetData = async () => {
+        try {
+            const response = await GetAllRequestsByUser()
+            if (response.success) {
+                const NewSenderData = response.data.filter((item) => item.Sender._id === user._id)
+                const NewReceiverData = response.data.filter((item) => item.Receiver._id === user._id)
+                setData({ SentData: NewSenderData, ReceivedData: NewReceiverData })
+            }
+        } catch (error) {
+
+            toast.error(error.message, { duration: 4000, position: 'top-right' })
+        }
+    }
+
+    useEffect(() => {
+        GetData()
+    }, [])
 
     return (
         <div className='flex flex-col'>
@@ -49,41 +72,37 @@ const Requests = () => {
                                             ID
                                         </th>
                                         <th scope="col" className="px-6 py-3">
-                                            Amount
+                                            To
                                         </th>
                                         <th scope="col" className="px-6 py-3">
-                                            From
+                                            Amount
                                         </th>
                                         <th scope="col" className="px-6 py-3">
                                             Status
                                         </th>
-                                        <th scope="col" className="px-6 py-3">
-                                            Action
-                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {/* {data?.map((items, index) => ( */}
-                                    <tr
-                                        // key={index} 
-                                        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                        <td className="px-6 py-4">
-                                            Blah Blah Blah
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            Blah Blah Blah
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            Blah Blah Blah
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            Blah Blah Blah
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            Blah Blah Blah
-                                        </td>
-                                    </tr>
-                                    {/* ))} */}
+                                    {data.SentData?.map((items, index) => (
+                                        <tr
+                                            key={index}
+                                            className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <td className="px-6 py-4">
+                                                {items._id}
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                <><span>{items.Receiver.FirstName} {items.Receiver.LastName}</span></>
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                {items.Amount}
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                <span className={items.Status === "Success" ? "text-green-800 bg-green-50 py-[2px] px-4 rounded-2xl" : (items.Status === "Falied" ? "text-red-800 bg-red-50 py-[2px] px-4 rounded-2xl" : "bg-yellow-100 text-yellow-700 py-[2px] px-4 rounded-2xl")}>
+                                                    {items.Status}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
                         </div>
@@ -97,10 +116,10 @@ const Requests = () => {
                                             ID
                                         </th>
                                         <th scope="col" className="px-6 py-3">
-                                            Amount
+                                            From
                                         </th>
                                         <th scope="col" className="px-6 py-3">
-                                            From
+                                            Amount
                                         </th>
                                         <th scope="col" className="px-6 py-3">
                                             Status
@@ -111,27 +130,29 @@ const Requests = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {/* {data?.map((items, index) => ( */}
-                                    <tr
-                                        // key={index} 
-                                        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                        <td className="px-6 py-4">
-                                            Blah Blah Blah
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            Blah Blah Blah
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            Blah Blah Blah
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            Blah Blah Blah
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            Blah Blah Blah
-                                        </td>
-                                    </tr>
-                                    {/* ))} */}
+                                {data.ReceivedData?.map((items, index) => (
+                                        <tr
+                                            key={index}
+                                            className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <td className="px-6 py-4">
+                                                {items._id}
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                <><span>{items.Sender.FirstName} {items.Sender.LastName}</span></>
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                {items.Amount}
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                <span className={items.Status === "Success" ? "text-green-800 bg-green-50 py-[2px] px-4 rounded-2xl" : (items.Status === "Falied" ? "text-red-800 bg-red-50 py-[2px] px-4 rounded-2xl" : "bg-yellow-100 text-yellow-700 py-[2px] px-4 rounded-2xl")}>
+                                                    {items.Status}
+                                                </span>
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                action
+                                            </td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
                         </div>
