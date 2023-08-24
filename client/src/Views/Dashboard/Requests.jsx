@@ -4,7 +4,7 @@ import Select from 'react-select'
 import toast from 'react-hot-toast';
 
 import { PageTitle, NewRequestModal } from '../../Components/Index';
-import { GetAllRequestsByUser } from "../../APIs/Request.Api"
+import { GetAllRequestsByUser, UpdateRequestStatus } from "../../APIs/Request.Api"
 
 const Requests = () => {
     const { user } = useSelector((state) => state.users)
@@ -22,7 +22,6 @@ const Requests = () => {
                 setData({ SentData: NewSenderData, ReceivedData: NewReceiverData })
             }
         } catch (error) {
-
             toast.error(error.message, { duration: 4000, position: 'top-right' })
         }
     }
@@ -30,6 +29,21 @@ const Requests = () => {
     useEffect(() => {
         GetData()
     }, [])
+
+
+    const UpdateStatus = async (Record, Status) => {
+        try {
+            const response = await UpdateRequestStatus({ ...Record, Status })
+            if (response.success) {
+                toast.success(response.message, { duration: 2000, position: 'top-right' })
+                GetData()
+            } else {
+                toast.error(error.message, { duration: 4000, position: 'top-right' })
+            }
+        } catch (error) {
+            toast.error(error.message, { duration: 4000, position: 'top-right' })
+        }
+    }
 
     return (
         <div className='flex flex-col'>
@@ -97,7 +111,7 @@ const Requests = () => {
                                                 {items.Amount}
                                             </td>
                                             <td className="px-6 py-4">
-                                                <span className={items.Status === "Success" ? "text-green-800 bg-green-50 py-[2px] px-4 rounded-2xl" : (items.Status === "Falied" ? "text-red-800 bg-red-50 py-[2px] px-4 rounded-2xl" : "bg-yellow-100 text-yellow-700 py-[2px] px-4 rounded-2xl")}>
+                                                <span className={items.Status === "Success" ? "text-green-800 bg-green-50 py-1 px-4 rounded-2xl" : (items.Status === "Falied" ? "text-red-800 bg-red-50 py-1 px-4 rounded-2xl" : "bg-yellow-100 text-yellow-700 py-1 px-4 rounded-2xl")}>
                                                     {items.Status}
                                                 </span>
                                             </td>
@@ -130,7 +144,7 @@ const Requests = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                {data.ReceivedData?.map((items, index) => (
+                                    {data.ReceivedData?.map((items, index) => (
                                         <tr
                                             key={index}
                                             className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -144,12 +158,33 @@ const Requests = () => {
                                                 {items.Amount}
                                             </td>
                                             <td className="px-6 py-4">
-                                                <span className={items.Status === "Success" ? "text-green-800 bg-green-50 py-[2px] px-4 rounded-2xl" : (items.Status === "Falied" ? "text-red-800 bg-red-50 py-[2px] px-4 rounded-2xl" : "bg-yellow-100 text-yellow-700 py-[2px] px-4 rounded-2xl")}>
+                                                <span className={items.Status === "Success" ? "text-green-800 bg-green-50 py-1 px-4 rounded-2xl" : (items.Status === "Falied" ? "text-red-800 bg-red-50 py-1 px-4 rounded-2xl" : "bg-yellow-100 text-yellow-700 py-1 px-4 rounded-2xl")}>
                                                     {items.Status}
                                                 </span>
                                             </td>
                                             <td className="px-6 py-4">
-                                                action
+                                                {items.Status === "Pending" && items.Receiver._id === user._id ?
+                                                    (
+                                                        <div className='flex gap-x-4'>
+                                                            <button
+                                                                onClick={() => UpdateStatus(Record, "Reject")}
+                                                                className='w-full px-4 py-1 text-sm text-red-500 transition-all bg-white border border-red-500 rounded-full hover:text-white hover:bg-red-500 dark:bg-white dark:text-red-500 dark:hover:bg-red-500 dark:hover:text-white'>
+                                                                Reject
+                                                            </button>
+
+                                                            <button
+                                                                onClick={() => UpdateStatus(Record, "Accept")}
+                                                                className='w-full px-4 py-1 text-sm text-green-500 transition-all bg-white border border-green-500 rounded-full hover:text-white hover:bg-green-500 dark:bg-white dark:text-green-500 dark:hover:bg-green-500 dark:hover:text-white'>
+                                                                Accept
+                                                            </button>
+                                                        </div>
+                                                    ) :
+                                                    (
+                                                        <button
+                                                            className='w-full px-8 py-3 text-sm text-red-500 transition-all bg-white border border-red-500 rounded-full hover:text-white hover:bg-red-500 dark:bg-white dark:text-red-500 dark:hover:bg-red-500 dark:hover:text-white'>
+                                                            Cancel
+                                                        </button>
+                                                    )}
                                             </td>
                                         </tr>
                                     ))}

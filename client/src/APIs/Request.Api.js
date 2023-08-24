@@ -19,3 +19,13 @@ export const SendRequest = async (request) => {
         return error.response.data
     }
 }
+
+// Update a request status 
+export const UpdateRequestStatus = async (request) => {
+    try {
+        const { data } = await AxiosInstance.post(`${import.meta.env.VITE_SERVER_URL}/v1/Requests/UpdateRequestStatus`, request)
+        return data
+    } catch (error) {
+        return error.response.data
+    }
+}
