@@ -30,6 +30,10 @@ const NewRequestModal = ({ showNewRequestModal, setShowNewRequestModal, ReloadDa
 
     const HandleNewRequest = async () => {
         try {
+            if (amount > user.Balance) {
+                toast.error("Insufficient funds", { duration: 4000, position: 'top-right' })
+            }
+
             if (!amount) {
                 toast.error("Put the amount you want to request", { duration: 4000, position: 'top-right' })
             } if (isVerified === "false") {

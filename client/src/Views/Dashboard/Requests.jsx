@@ -34,13 +34,17 @@ const Requests = () => {
 
     const UpdateStatus = async (items, Status) => {
         try {
-            const response = await UpdateRequestStatus({ ...items, Status })
-            if (response.success) {
-                toast.success(response.message, { duration: 2000, position: 'top-right' })
-                GetData()
-                dispatch(setReloadUser(true))
+            if (Status === "Success" && items.Amount > user.Balance) {
+                toast.error("Insuffcient funds", { duration: 4000, position: 'top-right' })
             } else {
-                toast.error(error.message, { duration: 4000, position: 'top-right' })
+                const response = await UpdateRequestStatus({ ...items, Status })
+                if (response.success) {
+                    toast.success(response.message, { duration: 2000, position: 'top-right' })
+                    GetData()
+                    dispatch(setReloadUsexr(true))
+                } else {
+                    toast.error(error.message, { duration: 4000, position: 'top-right' })
+                }
             }
         } catch (error) {
             toast.error(error.message, { duration: 4000, position: 'top-right' })
@@ -113,8 +117,8 @@ const Requests = () => {
                                                 {items.Amount}
                                             </td>
                                             <td className="px-6 py-4">
-                                                <span className={items.Status ==="Success" ? "text-green-800 bg-green-50 py-1 px-4 rounded-2xl" : (items.Status === "Reject" ? "text-red-800 bg-red-50 py-1 px-4 rounded-2xl" : "bg-yellow-100 text-yellow-700 py-1 px-4 rounded-2xl")}>
-                                                    {items.Status ==="Success" ? "Success" : (items.Status === "Reject" ? "Rejected" : "Pending")}
+                                                <span className={items.Status === "Success" ? "text-green-800 bg-green-50 py-1 px-4 rounded-2xl" : (items.Status === "Reject" ? "text-red-800 bg-red-50 py-1 px-4 rounded-2xl" : "bg-yellow-100 text-yellow-700 py-1 px-4 rounded-2xl")}>
+                                                    {items.Status === "Success" ? "Success" : (items.Status === "Reject" ? "Rejected" : "Pending")}
                                                 </span>
                                             </td>
                                         </tr>
@@ -160,8 +164,8 @@ const Requests = () => {
                                                 {items.Amount}
                                             </td>
                                             <td className="px-6 py-4">
-                                                <span className={items.Status ==="Success" ? "text-green-800 bg-green-50 py-1 px-4 rounded-2xl" : (items.Status === "Reject" ? "text-red-800 bg-red-50 py-1 px-4 rounded-2xl" : "bg-yellow-100 text-yellow-700 py-1 px-4 rounded-2xl")}>
-                                                    {items.Status ==="Success" ? "Success" : (items.Status === "Reject" ? "Rejected" : "Pending")}
+                                                <span className={items.Status === "Success" ? "text-green-800 bg-green-50 py-1 px-4 rounded-2xl" : (items.Status === "Reject" ? "text-red-800 bg-red-50 py-1 px-4 rounded-2xl" : "bg-yellow-100 text-yellow-700 py-1 px-4 rounded-2xl")}>
+                                                    {items.Status === "Success" ? "Success" : (items.Status === "Reject" ? "Rejected" : "Pending")}
                                                 </span>
                                             </td>
                                             <td className="px-6 py-4">
