@@ -58,7 +58,7 @@ const Sidebar = ({ user }) => {
                 </NavLink>
                 {user?.IsAdmin ? (
                   <NavLink
-                    to="/a"
+                    to="/Users"
                     onClick={HandleCloseSideBar}
                     className={({ isActive }) => (isActive ? activeLink : normalLink)}
                   >
