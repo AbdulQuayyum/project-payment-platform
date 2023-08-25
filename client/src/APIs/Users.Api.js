@@ -21,10 +21,18 @@ export const RegisterUser = async (payload) => {
 }
 
 // Get User's Information
-
 export const GetUserInformation = async () => {
     try {
         const { data } = await AxiosInstance.post(`${import.meta.env.VITE_SERVER_URL}/v1/Users/GetUserInformation`)
+        return data
+    } catch (error) {
+        return error.response.data
+    }
+}
+
+export const GetAllUsers = async () => {
+    try {
+        const { data } = await AxiosInstance.post(`${import.meta.env.VITE_SERVER_URL}/v1/Users/GetAllUsers`)
         return data
     } catch (error) {
         return error.response.data
