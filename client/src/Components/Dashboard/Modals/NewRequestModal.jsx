@@ -33,7 +33,9 @@ const NewRequestModal = ({ showNewRequestModal, setShowNewRequestModal, ReloadDa
             if (amount > user.Balance) {
                 toast.error("Insufficient funds", { duration: 4000, position: 'top-right' })
             }
-
+            if (receiver === user._id) {
+                toast.error("You can't request funds from yourself", { duration: 4000, position: 'top-right' })
+            }
             if (!amount) {
                 toast.error("Put the amount you want to request", { duration: 4000, position: 'top-right' })
             } if (isVerified === "false") {
@@ -41,6 +43,18 @@ const NewRequestModal = ({ showNewRequestModal, setShowNewRequestModal, ReloadDa
             } if (description === "") {
                 toast.error("Add a description for this transaction", { duration: 4000, position: 'top-right' })
             }
+
+            // Check if any of the error conditions were met before proceeding
+            if (amount > user.Balance ||
+                receiver === user._id ||
+                !amount ||
+                isVerified === "false" ||
+                description === "") {
+                // One of the error conditions was met, do not proceed with the request
+                return;
+            }
+
+
             const payload = {
                 Amount: amount,
                 Receiver: receiver,
