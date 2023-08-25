@@ -7,6 +7,7 @@ import { FaRegUser } from "react-icons/fa"
 import { CgLogOut } from "react-icons/cg"
 
 import Logo from "/logo.png"
+import { setUser } from '../../Redux/UsersSlice';
 import { UseStateContext } from "../../Contexts/DashboardContext"
 
 const Sidebar = ({ user }) => {
@@ -17,6 +18,11 @@ const Sidebar = ({ user }) => {
       setActiveMenu(false);
     }
   };
+
+  const HandleLogout = () => {
+    localStorage.removeItem("Token")
+    setUser(null)
+  }
 
   const activeLink =
     "flex items-center px-4 py-2 my-2 text-[#000] border-l-4 border-[#000] transition-all duration-500 bg-[#e5e7eb] rounded-r-full dark:bg-gray-700 dark:text-gray-200";
@@ -95,7 +101,7 @@ const Sidebar = ({ user }) => {
               <div className="mb-10 sm:mb-0">
                 <NavLink
                   to="/Login"
-                  onClick={() => { localStorage.removeItem("Token") }}
+                  onClick={HandleLogout}
                   className={({ isActive }) => (isActive ? activeLink : normalLink)}
                 >
                   <CgLogOut size={22} className="ml-4" />
