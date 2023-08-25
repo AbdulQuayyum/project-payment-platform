@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from "react-redux"
-import Select from 'react-select'
+import { useDispatch } from "react-redux"
 import toast from 'react-hot-toast';
+import Select from 'react-select'
 import { CgSearch } from "react-icons/cg"
-import moment from "moment"
 
-import { PageTitle, DepositModal, TransferFundsModal } from '../../Components/Index';
-import { GetAllTransactionsByUser } from '../../APIs/Transactions.Api';
+import { PageTitle } from '../../Components/Index';
+import { GetAllUsers, UpdateUserVerificationStatus } from "../../APIs/Users.Api"
 
-const Transactions = () => {
-    const { user } = useSelector((state) => state.users)
-    const [data = [], setData] = useState([])
-    const [showTransaferFundsModal, setShowTransaferFundsModal] = useState(false)
-    const [showDepositModal, setShowDepositModal] = useState(false)
+const Users = () => {
+    const [users, setUsers] = useState([])
     const dispatch = useDispatch()
     const options = [
-        { value: 'Pending', label: 'Pending' },
-        { value: 'Successful', label: 'Successful' },
-        { value: 'Failed', label: 'Failed' }
+        { value: 'Suspended', label: 'Suspended' },
+        { value: 'Verified', label: 'Verified' },
+        { value: 'Unverified', label: 'Unverified' }
     ]
 
     const customStyles = {
@@ -37,10 +33,13 @@ const Transactions = () => {
 
     const GetData = async () => {
         try {
-            const response = await GetAllTransactionsByUser()
+            const response = await GetAllUsers()
             if (response.success) {
-                setData(response.data)
+                setUsers(response.data)
+            } else {
+                toast.error(error.message, { duration: 4000, position: 'top-right' })
             }
+
         } catch (error) {
             toast.error(error.message, { duration: 4000, position: 'top-right' })
         }
@@ -50,11 +49,24 @@ const Transactions = () => {
         GetData()
     }, [])
 
+    const UpdateStatus = async (items, IsVerified) => {
+        try {
+            const response = await UpdateUserVerificationStatus({ SelectedUser: items._id, IsVerified })
+            if (response.success) {
+                toast.success(response.message, { duration: 2000, position: 'top-right' })
+                GetData()
+            } else {
+                toast.error(error.message, { duration: 4000, position: 'top-right' })
+            }
+        } catch (error) {
+            toast.error(error.message, { duration: 4000, position: 'top-right' })
+        }
+    }
 
     return (
         <div className='flex flex-col'>
             <div className="container p-6 mx-auto">
-                <PageTitle Title={"Transactions"} />
+                <PageTitle Title={"Users"} />
                 <div className='flex flex-col gap-y-6'>
                     <div className='flex justify-between px-10 py-2 bg-white border border-white rounded-2xl'>
                         <div className="flex relative items-center">
@@ -72,77 +84,61 @@ const Transactions = () => {
                                 options={options}
                                 placeholder='Select...' />
                         </div>
-                        <div className='flex gap-x-4'>
-                            <button
-                                onClick={() => setShowDepositModal(true)}
-                                className='w-full px-8 py-3 text-sm text-white transition-all bg-black border border-black rounded-full hover:bg-white hover:text-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white'>
-                                Deposit
-                            </button>
-                            <button
-                                onClick={() => setShowTransaferFundsModal(true)}
-                                className='w-full px-8 py-3 text-sm text-black transition-all bg-white border border-black rounded-full hover:text-white hover:bg-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white'>
-                                Transfer
-                            </button>
-                        </div>
                     </div>
                     <div className='flex px-10 py-5 overflow-x-auto bg-white border border-white shadow-md rounded-2xl'>
                         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" className="px-6 py-3">
-                                        Date
+                                        First Name
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                        Transaction ID
+                                        Last Name
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                        Amount
+                                        Email
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                        Type
+                                        Phone
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                        Reference Account
+                                        Verified
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                        Reference
-                                    </th>
-                                    <th scope="col" className="px-6 py-3">
-                                        Status
+                                        Actions
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {data?.map((items, index) => (
+                                {users?.map((items, index) => (
                                     <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                        {/* <td className="px-6 py-4">
-                                        Blah Blah Blah
-                                    </td>
-                                    <td className="px-6 py-4">
-                                        Blah Blah Blah
-                                    </td> */}
                                         <td className="px-6 py-4">
-                                            {moment(items.createdAt).format('MMMM Do YYYY, h:mm:ss a')} {/* Format createdAt date */}
+                                            {items.FirstName}
                                         </td>
                                         <td className="px-6 py-4">
-                                            {items._id}
+                                            {items.LastName}
                                         </td>
                                         <td className="px-6 py-4">
-                                            {items.Amount}
+                                            {items.Email}
                                         </td>
                                         <td className="px-6 py-4">
-                                            {items.Sender._id === user._id ? "Debit" : "Credit"}
+                                            {items.PhoneNumber}
                                         </td>
                                         <td className="px-6 py-4">
-                                            {items.Sender._id === user._id ? <><span>{items.Receiver.FirstName} {items.Receiver.LastName}</span></> : <><span>{items.Sender.FirstName} {items.Sender.LastName}</span></>}
+                                            {items.IsVerified ? "Yes" : "No"}
                                         </td>
                                         <td className="px-6 py-4">
-                                            {items.Reference}
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            <span className={items.Status ==="Success" ? "text-green-800 bg-green-50 py-1 px-4 rounded-2xl" : (items.Status === "Reject" ? "text-red-800 bg-red-50 py-1 px-4 rounded-2xl" : "bg-yellow-100 text-yellow-700 py-1 px-4 rounded-2xl")}>
-                                                {items.Status ==="Success" ? "Success" : (items.Status === "Reject" ? "Rejected" : "Pending")}
-                                            </span>
+                                            {items.IsVerified ?
+                                                <button
+                                                    onClick={() => UpdateStatus(items, false)}
+                                                    className='w-full px-4 py-1 text-sm text-red-500 transition-all bg-white border border-red-500 rounded-full hover:text-white hover:bg-red-500 dark:bg-white dark:text-red-500 dark:hover:bg-red-500 dark:hover:text-white'>
+                                                    Suspend
+                                                </button> :
+                                                <button
+                                                    onClick={() => UpdateStatus(items, true)}
+                                                    className='w-full px-4 py-1 text-sm text-green-500 transition-all bg-white border border-green-500 rounded-full hover:text-white hover:bg-green-500 dark:bg-white dark:text-green-500 dark:hover:bg-green-500 dark:hover:text-white'>
+                                                    Activate
+                                                </button>}
                                         </td>
                                     </tr>
                                 ))}
@@ -151,10 +147,8 @@ const Transactions = () => {
                     </div>
                 </div>
             </div>
-            {showTransaferFundsModal && <TransferFundsModal showTransaferFundsModal={showTransaferFundsModal} setShowTransaferFundsModal={setShowTransaferFundsModal} ReloadData={GetData} />}
-            {showDepositModal && <DepositModal showDepositModal={showDepositModal} setShowDepositModal={setShowDepositModal} ReloadData={GetData} />}
         </div>
     )
 }
 
-export default Transactions
+export default Users

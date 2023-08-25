@@ -41,7 +41,7 @@ const Requests = () => {
                 if (response.success) {
                     toast.success(response.message, { duration: 2000, position: 'top-right' })
                     GetData()
-                    dispatch(setReloadUsexr(true))
+                    dispatch(setReloadUser(true))
                 } else {
                     toast.error(error.message, { duration: 4000, position: 'top-right' })
                 }

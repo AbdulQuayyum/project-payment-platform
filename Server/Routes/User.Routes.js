@@ -57,6 +57,14 @@ router.post("/Login", async (req, res) => {
             })
         }
 
+        // Check if the user is verified
+        if (!CheckUser.IsVerified) {
+            return res.send({
+                success: false,
+                message: "User is not verified yet or has been suspended"
+            })
+        }
+
         // Generate token
         const Token = jwt.sign({ UserID: CheckUser._id }, process.env.SECRET_KEY, { expiresIn: 60 * 60 * 24 })
         res.send({
@@ -90,6 +98,43 @@ router.post("/GetUserInformation", AuthMiddleware, async (req, res) => {
         });
     } catch (error) {
         return res.status(500).json({
+            message: error.message,
+            success: false
+        });
+    }
+})
+
+// Get All Users
+router.post("/GetAllUsers", AuthMiddleware, async (req, res) => {
+    try {
+        const AllUsers = await User.find()
+        res.send({
+            data: AllUsers,
+            message: "All Users fetched successfully",
+            success: true
+        })
+    } catch (error) {
+        return res.send({
+            message: error.message,
+            success: false
+        });
+    }
+})
+
+// Update user's verfication status
+router.post("/UpdateUserVerificationStatus", AuthMiddleware, async (req, res) => {
+    try {
+        await User.findByIdAndUpdate(req.body.SelectedUser, {
+            IsVerified: req.body.IsVerified
+        })
+        res.send({
+            data: null,
+            message: "User verified status updated successfully",
+            success: true
+        })
+    } catch (error) {
+        return res.send({
+            data: error,
             message: error.message,
             success: false
         });
