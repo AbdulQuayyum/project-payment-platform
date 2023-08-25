@@ -45,7 +45,7 @@ router.post("/SendRequest", AuthMiddleware, async (req, res) => {
 // Update a request status
 router.post("/UpdateRequestStatus", AuthMiddleware, async (req, res) => {
     try {
-        if (req.body.Status === "Accept") {
+        if (req.body.Status === "Success") {
 
             // Create a transaction
             const NewTransaction = new Transaction({
@@ -53,7 +53,7 @@ router.post("/UpdateRequestStatus", AuthMiddleware, async (req, res) => {
                 Receiver: req.body.Sender._id,
                 Amount: req.body.Amount,
                 Reference: req.body.Reference,
-                Status: "Accept "
+                Status: "Success "
             })
             await NewTransaction.save()
 
