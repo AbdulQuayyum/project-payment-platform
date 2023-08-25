@@ -127,7 +127,7 @@ router.post("/UpdateUserVerificationStatus", AuthMiddleware, async (req, res) =>
         await User.findByIdAndUpdate(req.body.SelectedUser, {
             IsVerified: req.body.IsVerified
         })
-        res.sendStatus({
+        res.send({
             data: null,
             message: "User verified status updated successfully",
             success: true

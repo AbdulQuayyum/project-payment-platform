@@ -5,15 +5,15 @@ import Select from 'react-select'
 import { CgSearch } from "react-icons/cg"
 
 import { PageTitle } from '../../Components/Index';
-import { GetAllUsers } from "../../APIs/Users.Api"
+import { GetAllUsers, UpdateUserVerificationStatus } from "../../APIs/Users.Api"
 
 const Users = () => {
     const [users, setUsers] = useState([])
     const dispatch = useDispatch()
     const options = [
-        { value: 'Pending', label: 'Pending' },
-        { value: 'Successful', label: 'Successful' },
-        { value: 'Failed', label: 'Failed' }
+        { value: 'Suspended', label: 'Suspended' },
+        { value: 'Verified', label: 'Verified' },
+        { value: 'Unverified', label: 'Unverified' }
     ]
 
     const customStyles = {
@@ -48,6 +48,20 @@ const Users = () => {
     useEffect(() => {
         GetData()
     }, [])
+
+    const UpdateStatus = async (items, IsVerified) => {
+        try {
+            const response = await UpdateUserVerificationStatus({ SelectedUser: items._id, IsVerified })
+            if (response.success) {
+                toast.success(response.message, { duration: 2000, position: 'top-right' })
+                GetData()
+            } else {
+                toast.error(error.message, { duration: 4000, position: 'top-right' })
+            }
+        } catch (error) {
+            toast.error(error.message, { duration: 4000, position: 'top-right' })
+        }
+    }
 
     return (
         <div className='flex flex-col'>
@@ -116,12 +130,12 @@ const Users = () => {
                                         <td className="px-6 py-4">
                                             {items.IsVerified ?
                                                 <button
-                                                    // onClick={() => UpdateStatus(items, "Reject")}
+                                                    onClick={() => UpdateStatus(items, false)}
                                                     className='w-full px-4 py-1 text-sm text-red-500 transition-all bg-white border border-red-500 rounded-full hover:text-white hover:bg-red-500 dark:bg-white dark:text-red-500 dark:hover:bg-red-500 dark:hover:text-white'>
                                                     Suspend
                                                 </button> :
                                                 <button
-                                                    // onClick={() => UpdateStatus(items, "Success")}
+                                                    onClick={() => UpdateStatus(items, true)}
                                                     className='w-full px-4 py-1 text-sm text-green-500 transition-all bg-white border border-green-500 rounded-full hover:text-white hover:bg-green-500 dark:bg-white dark:text-green-500 dark:hover:bg-green-500 dark:hover:text-white'>
                                                     Activate
                                                 </button>}
