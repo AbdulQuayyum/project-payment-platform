@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 
 import { PageTitle, NewRequestModal } from '../../Components/Index';
 import { GetAllRequestsByUser, UpdateRequestStatus } from "../../APIs/Request.Api"
+import { setReloadUser } from '../../Redux/UsersSlice';
 
 const Requests = () => {
     const { user } = useSelector((state) => state.users)
@@ -37,6 +38,7 @@ const Requests = () => {
             if (response.success) {
                 toast.success(response.message, { duration: 2000, position: 'top-right' })
                 GetData()
+                dispatch(setReloadUser(true))
             } else {
                 toast.error(error.message, { duration: 4000, position: 'top-right' })
             }
