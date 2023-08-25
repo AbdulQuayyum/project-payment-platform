@@ -53,7 +53,7 @@ router.post("/UpdateRequestStatus", AuthMiddleware, async (req, res) => {
                 Receiver: req.body.Sender._id,
                 Amount: req.body.Amount,
                 Reference: req.body.Reference,
-                status: "Accept"
+                Status: "Accept "
             })
             await NewTransaction.save()
 
