@@ -42,7 +42,6 @@ const Transactions = () => {
                 setData(response.data)
             }
         } catch (error) {
-
             toast.error(error.message, { duration: 4000, position: 'top-right' })
         }
     }
@@ -58,7 +57,7 @@ const Transactions = () => {
                 <PageTitle Title={"Transactions"} />
                 <div className='flex flex-col gap-y-6'>
                     <div className='flex justify-between px-10 py-2 bg-white border border-white rounded-2xl'>
-                        <div className="flex items-center">
+                        <div className="flex relative items-center">
                             <input className="h-10 p-6 w-full sm:w-[500px] px-5 text-base bg-white border-1 border border-[#BDBDBD] rounded-2xl focus:outline-none"
                                 type="search" name="search" placeholder="Search" />
                             <button type="submit" className="absolute right-0 mr-4">
