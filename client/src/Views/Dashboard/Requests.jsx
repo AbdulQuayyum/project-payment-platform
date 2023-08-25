@@ -191,7 +191,7 @@ const Requests = () => {
                     </div>
                 </div>
             </div>
-            {showNewRequestModal && <NewRequestModal showNewRequestModal={showNewRequestModal} setShowNewRequestModal={setShowNewRequestModal} />}
+            {showNewRequestModal && <NewRequestModal showNewRequestModal={showNewRequestModal} setShowNewRequestModal={setShowNewRequestModal} ReloadData={GetData} />}
         </div>
     )
 }

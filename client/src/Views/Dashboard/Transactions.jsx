@@ -152,8 +152,8 @@ const Transactions = () => {
                     </div>
                 </div>
             </div>
-            {showTransaferFundsModal && <TransferFundsModal showTransaferFundsModal={showTransaferFundsModal} setShowTransaferFundsModal={setShowTransaferFundsModal} />}
-            {showDepositModal && <DepositModal showDepositModal={showDepositModal} setShowDepositModal={setShowDepositModal} />}
+            {showTransaferFundsModal && <TransferFundsModal showTransaferFundsModal={showTransaferFundsModal} setShowTransaferFundsModal={setShowTransaferFundsModal} ReloadData={GetData} />}
+            {showDepositModal && <DepositModal showDepositModal={showDepositModal} setShowDepositModal={setShowDepositModal} ReloadData={GetData} />}
         </div>
     )
 }
