@@ -57,6 +57,14 @@ router.post("/Login", async (req, res) => {
             })
         }
 
+        // Check if the user is verified
+        if (!CheckUser.IsVerified) {
+            return res.send({
+                success: false,
+                message: "User is not verified yet or has been suspended"
+            })
+        }
+
         // Generate token
         const Token = jwt.sign({ UserID: CheckUser._id }, process.env.SECRET_KEY, { expiresIn: 60 * 60 * 24 })
         res.send({
