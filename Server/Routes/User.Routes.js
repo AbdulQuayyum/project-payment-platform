@@ -104,4 +104,21 @@ router.post("/GetUserInformation", AuthMiddleware, async (req, res) => {
     }
 })
 
+// Get All Users
+router.post("/GetAllUsers", AuthMiddleware, async (req, res) => {
+    try {
+        const AllUsers = await User.find()
+        res.send({
+            data: AllUsers,
+            message: "All Users fetched successfully",
+            success: true
+        })
+    } catch (error) {
+        return res.send({
+            message: error.message,
+            success: false
+        });
+    }
+})
+
 module.exports = router
