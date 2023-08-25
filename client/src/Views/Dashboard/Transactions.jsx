@@ -141,8 +141,8 @@ const Transactions = () => {
                                             {items.Reference}
                                         </td>
                                         <td className="px-6 py-4">
-                                            <span className={items.Status === "Accept" || "Success" ? "text-green-800 bg-green-50 py-1 px-4 rounded-2xl" : (items.Status === "Reject" ? "text-red-800 bg-red-50 py-1 px-4 rounded-2xl" : "bg-yellow-100 text-yellow-700 py-1 px-4 rounded-2xl")}>
-                                                {items.Status === "Accept" || "Success" ? "Success" : (items.Status === "Reject" ? "Rejected" : "Pending")}
+                                            <span className={items.Status ==="Success" ? "text-green-800 bg-green-50 py-1 px-4 rounded-2xl" : (items.Status === "Reject" ? "text-red-800 bg-red-50 py-1 px-4 rounded-2xl" : "bg-yellow-100 text-yellow-700 py-1 px-4 rounded-2xl")}>
+                                                {items.Status ==="Success" ? "Success" : (items.Status === "Reject" ? "Rejected" : "Pending")}
                                             </span>
                                         </td>
                                     </tr>
