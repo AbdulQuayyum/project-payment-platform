@@ -38,3 +38,13 @@ export const GetAllUsers = async () => {
         return error.response.data
     }
 }
+
+// Update User verified status
+export const UpdateUserVerificationStatus = async (payload) => {
+    try {
+        const { data } = await AxiosInstance.post(`${import.meta.env.VITE_SERVER_URL}/v1/Users/UpdateUserVerificationStatus`, payload)
+        return data
+    } catch (error) {
+        return error.response.data
+    }
+}
