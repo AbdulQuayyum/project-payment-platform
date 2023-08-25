@@ -141,9 +141,8 @@ const Transactions = () => {
                                             {items.Reference}
                                         </td>
                                         <td className="px-6 py-4">
-                                            <span className={items.Status === "Accept" ? "text-green-800 bg-green-50 py-1 px-4 rounded-2xl" : "text-red-800 bg-red-50 py-1 px-4 rounded-2xl"}>
-
-                                                {items.Status}
+                                            <span className={items.Status ==="Success" ? "text-green-800 bg-green-50 py-1 px-4 rounded-2xl" : (items.Status === "Reject" ? "text-red-800 bg-red-50 py-1 px-4 rounded-2xl" : "bg-yellow-100 text-yellow-700 py-1 px-4 rounded-2xl")}>
+                                                {items.Status ==="Success" ? "Success" : (items.Status === "Reject" ? "Rejected" : "Pending")}
                                             </span>
                                         </td>
                                     </tr>
@@ -153,8 +152,8 @@ const Transactions = () => {
                     </div>
                 </div>
             </div>
-            {showTransaferFundsModal && <TransferFundsModal showTransaferFundsModal={showTransaferFundsModal} setShowTransaferFundsModal={setShowTransaferFundsModal} />}
-            {showDepositModal && <DepositModal showDepositModal={showDepositModal} setShowDepositModal={setShowDepositModal} />}
+            {showTransaferFundsModal && <TransferFundsModal showTransaferFundsModal={showTransaferFundsModal} setShowTransaferFundsModal={setShowTransaferFundsModal} ReloadData={GetData} />}
+            {showDepositModal && <DepositModal showDepositModal={showDepositModal} setShowDepositModal={setShowDepositModal} ReloadData={GetData} />}
         </div>
     )
 }

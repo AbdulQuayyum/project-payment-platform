@@ -14,6 +14,7 @@ const DepositModal = ({ showDepositModal, setShowDepositModal, ReloadData }) => 
             } else {
                 toast.success("Working on This Feature.", { duration: 2000, position: 'top-right' })
                 setShowDepositModal(false)
+                ReloadData()
             }
 
         } catch (error) {

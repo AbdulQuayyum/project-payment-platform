@@ -4,9 +4,11 @@ import toast from 'react-hot-toast';
 import { MdCloseFullscreen } from "react-icons/md"
 
 import { VerifyAccount, TransferFunds } from '../../../APIs/Transactions.Api'
+import { setReloadUser } from '../../../Redux/UsersSlice';
 
 const TransferFundsModal = ({ showTransaferFundsModal, setShowTransaferFundsModal, ReloadData }) => {
     const { user } = useSelector((state) => state.users)
+    const dispatch = useDispatch()
     const [receiver, setReceiver] = useState("")
     const [amount, setAmount] = useState("")
     const [description, setDescription] = useState("")
@@ -48,6 +50,7 @@ const TransferFundsModal = ({ showTransaferFundsModal, setShowTransaferFundsModa
                 ReloadData()
                 setShowTransaferFundsModal(false)
                 toast.success(response.message, { duration: 2000, position: 'top-right' })
+                dispatch(setReloadUser(true))
             } else {
                 toast.error(response.message, { duration: 2000, position: 'top-right' })
                 setShowTransaferFundsModal(false)
