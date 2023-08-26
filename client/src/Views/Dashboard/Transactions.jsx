@@ -7,9 +7,11 @@ import moment from "moment"
 
 import { PageTitle, DepositModal, TransferFundsModal } from '../../Components/Index';
 import { GetAllTransactionsByUser } from '../../APIs/Transactions.Api';
+import { Loader } from "../../Components/Index"
 
 const Transactions = () => {
     const { user } = useSelector((state) => state.users)
+    const [loading, setLoading] = useState(false)
     const [data = [], setData] = useState([])
     const [showTransaferFundsModal, setShowTransaferFundsModal] = useState(false)
     const [showDepositModal, setShowDepositModal] = useState(false)
@@ -36,12 +38,15 @@ const Transactions = () => {
     };
 
     const GetData = async () => {
+        setLoading(true)
         try {
             const response = await GetAllTransactionsByUser()
             if (response.success) {
+                setLoading(false)
                 setData(response.data)
             }
         } catch (error) {
+            setLoading(false)
             toast.error(error.message, { duration: 4000, position: 'top-right' })
         }
     }
@@ -140,8 +145,8 @@ const Transactions = () => {
                                             {items.Reference}
                                         </td>
                                         <td className="px-6 py-4">
-                                            <span className={items.Status ==="Success" ? "text-green-800 bg-green-50 py-1 px-4 rounded-2xl" : (items.Status === "Reject" ? "text-red-800 bg-red-50 py-1 px-4 rounded-2xl" : "bg-yellow-100 text-yellow-700 py-1 px-4 rounded-2xl")}>
-                                                {items.Status ==="Success" ? "Success" : (items.Status === "Reject" ? "Rejected" : "Pending")}
+                                            <span className={items.Status === "Success" ? "text-green-800 bg-green-50 py-1 px-4 rounded-2xl" : (items.Status === "Reject" ? "text-red-800 bg-red-50 py-1 px-4 rounded-2xl" : "bg-yellow-100 text-yellow-700 py-1 px-4 rounded-2xl")}>
+                                                {items.Status === "Success" ? "Success" : (items.Status === "Reject" ? "Rejected" : "Pending")}
                                             </span>
                                         </td>
                                     </tr>
@@ -151,6 +156,7 @@ const Transactions = () => {
                     </div>
                 </div>
             </div>
+            {loading && <Loader />}
             {showTransaferFundsModal && <TransferFundsModal showTransaferFundsModal={showTransaferFundsModal} setShowTransaferFundsModal={setShowTransaferFundsModal} ReloadData={GetData} />}
             {showDepositModal && <DepositModal showDepositModal={showDepositModal} setShowDepositModal={setShowDepositModal} ReloadData={GetData} />}
         </div>
