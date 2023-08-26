@@ -7,9 +7,11 @@ import moment from "moment"
 
 import { PageTitle, DepositModal, TransferFundsModal } from '../../Components/Index';
 import { GetAllTransactionsByUser } from '../../APIs/Transactions.Api';
+import { Loader } from "../../Components/Index"
 
 const Transactions = () => {
     const { user } = useSelector((state) => state.users)
+    const [loading, setLoading] = useState(false)
     const [data = [], setData] = useState([])
     const [showTransaferFundsModal, setShowTransaferFundsModal] = useState(false)
     const [showDepositModal, setShowDepositModal] = useState(false)
@@ -36,12 +38,15 @@ const Transactions = () => {
     };
 
     const GetData = async () => {
+        setLoading(true)
         try {
             const response = await GetAllTransactionsByUser()
             if (response.success) {
+                setLoading(false)
                 setData(response.data)
             }
         } catch (error) {
+            setLoading(false)
             toast.error(error.message, { duration: 4000, position: 'top-right' })
         }
     }
@@ -52,19 +57,12 @@ const Transactions = () => {
 
 
     return (
-        <div className='flex flex-col'>
-            <div className="container p-6 mx-auto">
+        <div className=''>
+            <div className="mx-auto flex flex-col container">
                 <PageTitle Title={"Transactions"} />
                 <div className='flex flex-col gap-y-6'>
-                    <div className='flex justify-between px-10 py-2 bg-white border border-white rounded-2xl'>
-                        <div className="flex relative items-center">
-                            <input className="h-10 p-6 w-full sm:w-[500px] px-5 text-base bg-white border-1 border border-[#BDBDBD] rounded-2xl focus:outline-none"
-                                type="search" name="search" placeholder="Search" />
-                            <button type="submit" className="absolute right-0 mr-4">
-                                <CgSearch />
-                            </button>
-                        </div>
-                        <div>
+                    <div className='flex justify-around gap-y-4 flex-wrap py-2 bg-white border border-white rounded-2xl'>
+                        <div className=''>
                             <Select
                                 className='flex'
                                 isSearchable
@@ -72,7 +70,7 @@ const Transactions = () => {
                                 options={options}
                                 placeholder='Select...' />
                         </div>
-                        <div className='flex gap-x-4'>
+                        <div className='flex gap-x-4 md:order-2'>
                             <button
                                 onClick={() => setShowDepositModal(true)}
                                 className='w-full px-8 py-3 text-sm text-white transition-all bg-black border border-black rounded-full hover:bg-white hover:text-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white'>
@@ -84,9 +82,16 @@ const Transactions = () => {
                                 Transfer
                             </button>
                         </div>
+                        <div className="flex relative  md:order-1 items-center">
+                            <input className="h-10 p-6 w-full sm:w-[400px] px-5 text-base bg-white border-1 border border-[#BDBDBD] rounded-2xl focus:outline-none"
+                                type="search" name="search" placeholder="Search" />
+                            <button type="submit" className="absolute right-0 mr-4">
+                                <CgSearch />
+                            </button>
+                        </div>
                     </div>
                     <div className='flex px-10 py-5 overflow-x-auto bg-white border border-white shadow-md rounded-2xl'>
-                        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <table className="w-full table-auto text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" className="px-6 py-3">
@@ -140,8 +145,8 @@ const Transactions = () => {
                                             {items.Reference}
                                         </td>
                                         <td className="px-6 py-4">
-                                            <span className={items.Status ==="Success" ? "text-green-800 bg-green-50 py-1 px-4 rounded-2xl" : (items.Status === "Reject" ? "text-red-800 bg-red-50 py-1 px-4 rounded-2xl" : "bg-yellow-100 text-yellow-700 py-1 px-4 rounded-2xl")}>
-                                                {items.Status ==="Success" ? "Success" : (items.Status === "Reject" ? "Rejected" : "Pending")}
+                                            <span className={items.Status === "Success" ? "text-green-800 bg-green-50 py-1 px-4 rounded-2xl" : (items.Status === "Reject" ? "text-red-800 bg-red-50 py-1 px-4 rounded-2xl" : "bg-yellow-100 text-yellow-700 py-1 px-4 rounded-2xl")}>
+                                                {items.Status === "Success" ? "Success" : (items.Status === "Reject" ? "Rejected" : "Pending")}
                                             </span>
                                         </td>
                                     </tr>
@@ -151,6 +156,7 @@ const Transactions = () => {
                     </div>
                 </div>
             </div>
+            {loading && <Loader />}
             {showTransaferFundsModal && <TransferFundsModal showTransaferFundsModal={showTransaferFundsModal} setShowTransaferFundsModal={setShowTransaferFundsModal} ReloadData={GetData} />}
             {showDepositModal && <DepositModal showDepositModal={showDepositModal} setShowDepositModal={setShowDepositModal} ReloadData={GetData} />}
         </div>

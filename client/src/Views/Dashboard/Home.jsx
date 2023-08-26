@@ -10,8 +10,8 @@ const DashboardHome = () => {
   const { user } = useSelector((state) => state.users)
 
   return (
-    <div className='flex flex-col'>
-      <div className="container p-6 mx-auto">
+    <div className=''>
+      <div className="mx-auto flex flex-col container">
         <PageTitle Title={"Overview"} />
         <div className='my-4'>
           <span className='font-extrabold text-2xl md:text-[40px] text-[#aaa]'>Welcome back, {user?.FirstName}</span>

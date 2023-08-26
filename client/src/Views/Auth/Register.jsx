@@ -7,6 +7,7 @@ import AuthLayout from '../../Layouts/Auth.Layout'
 import CountryRawData from "../../Data/Country.json"
 import IDRawData from "../../Data/IdType.json"
 import { RegisterUser } from '../../APIs/Users.api'
+import { Loader } from "../../Components/Index.js"
 
 const Register = () => {
     const [firstName, setFirstName] = useState("")
@@ -24,6 +25,7 @@ const Register = () => {
     const [country, setCountry] = useState(null);
     const [IdType, setIdType] = useState(null)
     const [consent, setConsent] = useState(false);
+    const [loading, setLoading] = useState(false)
 
     const navigate = useNavigate()
     const delay = ms => new Promise(
@@ -86,11 +88,12 @@ const Register = () => {
     useEffect(() => {
         if (confirmPassword !== password) {
             toast.error("Passwords do not match.", { duration: 1000, position: 'top-right' })
-        } 
+        }
     }, [confirmPassword])
 
 
     const SubmitValues = async () => {
+        setLoading(true)
         try {
             if (!firstName || !lastName || !email || !phone || !address || !identityNumber || !password || !country || !IdType) {
                 toast.error("Please fill in all the required fields.", { duration: 4000, position: 'top-right' })
@@ -110,16 +113,20 @@ const Register = () => {
             });
 
             if (response.success) {
+                setLoading(false)
                 toast.success(response.message, { duration: 4000, position: 'top-right' })
-                async function nextPage() {
-                    await delay(4000)
-                    // navigate("/Login")
-                }
-                nextPage()
+                // async function nextPage() {
+                //     await delay(4000)
+                //     navigate("/Login")
+                // }
+                // nextPage()
+                navigate("/Login")
             } else {
+                setLoading(false)
                 toast.error("Registration failed: " + response.message, { duration: 4000, position: 'top-right' })
             }
         } catch (error) {
+            setLoading(false)
             toast.error(error.message, { duration: 4000, position: 'top-right' })
         }
     };
@@ -367,6 +374,7 @@ const Register = () => {
                     </Link>
                 </div>
             </div>
+            {loading && <Loader />}
         </AuthLayout>
     )
 }

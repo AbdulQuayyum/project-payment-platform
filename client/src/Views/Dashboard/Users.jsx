@@ -5,10 +5,12 @@ import Select from 'react-select'
 import { CgSearch } from "react-icons/cg"
 
 import { PageTitle } from '../../Components/Index';
+import { Loader } from "../../Components/Index"
 import { GetAllUsers, UpdateUserVerificationStatus } from "../../APIs/Users.Api"
 
 const Users = () => {
     const [users, setUsers] = useState([])
+    const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
     const options = [
         { value: 'Suspended', label: 'Suspended' },
@@ -32,15 +34,19 @@ const Users = () => {
     };
 
     const GetData = async () => {
+        setLoading(true)
         try {
             const response = await GetAllUsers()
             if (response.success) {
+                setLoading(false)
                 setUsers(response.data)
             } else {
+                setLoading(false)
                 toast.error(error.message, { duration: 4000, position: 'top-right' })
             }
 
         } catch (error) {
+            setLoading(false)
             toast.error(error.message, { duration: 4000, position: 'top-right' })
         }
     }
@@ -50,27 +56,31 @@ const Users = () => {
     }, [])
 
     const UpdateStatus = async (items, IsVerified) => {
+        setLoading(true)
         try {
             const response = await UpdateUserVerificationStatus({ SelectedUser: items._id, IsVerified })
             if (response.success) {
+                setLoading(false)
                 toast.success(response.message, { duration: 2000, position: 'top-right' })
                 GetData()
             } else {
+                setLoading(false)
                 toast.error(error.message, { duration: 4000, position: 'top-right' })
             }
         } catch (error) {
+            setLoading(false)
             toast.error(error.message, { duration: 4000, position: 'top-right' })
         }
     }
 
     return (
-        <div className='flex flex-col'>
-            <div className="container p-6 mx-auto">
+        <div className=''>
+            <div className="mx-auto flex flex-col container">
                 <PageTitle Title={"Users"} />
                 <div className='flex flex-col gap-y-6'>
                     <div className='flex justify-between px-10 py-2 bg-white border border-white rounded-2xl'>
                         <div className="flex relative items-center">
-                            <input className="h-10 p-6 w-full sm:w-[500px] px-5 text-base bg-white border-1 border border-[#BDBDBD] rounded-2xl focus:outline-none"
+                            <input className="h-10 p-6 w-full md:w-[400px] px-5 text-base bg-white border-1 border border-[#BDBDBD] rounded-2xl focus:outline-none"
                                 type="search" name="search" placeholder="Search" />
                             <button type="submit" className="absolute right-0 mr-4">
                                 <CgSearch />
@@ -147,6 +157,7 @@ const Users = () => {
                     </div>
                 </div>
             </div>
+            {loading && <Loader />}
         </div>
     )
 }

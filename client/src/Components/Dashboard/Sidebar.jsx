@@ -1,4 +1,5 @@
 import React from 'react'
+import { useDispatch } from "react-redux"
 import { Link, NavLink } from "react-router-dom";
 import { TbArrowBigLeftLines, TbListDetails } from "react-icons/tb"
 import { RxDashboard } from "react-icons/rx"
@@ -7,21 +8,32 @@ import { FaRegUser } from "react-icons/fa"
 import { CgLogOut } from "react-icons/cg"
 
 import Logo from "/logo.png"
-import { setUser } from '../../Redux/UsersSlice';
+import { setUser, setRemoveUser } from '../../Redux/UsersSlice';
 import { UseStateContext } from "../../Contexts/DashboardContext"
 
 const Sidebar = ({ user }) => {
   const { activeMenu, setActiveMenu, screenSize } = UseStateContext();
+  const dispatch = useDispatch()
+
+  const delay = ms => new Promise(
+    resolve => setTimeout(resolve, ms)
+  )
 
   const HandleCloseSideBar = () => {
-    if (activeMenu !== undefined && screenSize <= 900) {
+    if (activeMenu !== undefined && screenSize <= 1280) {
       setActiveMenu(false);
     }
   };
 
   const HandleLogout = () => {
     localStorage.removeItem("Token")
+    dispatch(setRemoveUser(true));
     setUser(null)
+    async function nextPage() {
+      await delay(2000)
+      window.location.reload()
+    }
+    nextPage()
   }
 
   const activeLink =
@@ -45,7 +57,7 @@ const Sidebar = ({ user }) => {
               <button
                 type="button"
                 onClick={() => setActiveMenu(!activeMenu)}
-                className="items-center block p-3 text-xl rounded-full hover:bg-light-gray md:hidden"
+                className="items-center block p-3 text-xl rounded-full hover:bg-light-gray"
               >
                 <TbArrowBigLeftLines size={24} />
               </button>

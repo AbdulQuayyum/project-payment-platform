@@ -6,23 +6,28 @@ import toast from 'react-hot-toast';
 import { PageTitle, NewRequestModal } from '../../Components/Index';
 import { GetAllRequestsByUser, UpdateRequestStatus } from "../../APIs/Request.Api"
 import { setReloadUser } from '../../Redux/UsersSlice';
+import { Loader } from "../../Components/Index"
 
 const Requests = () => {
     const { user } = useSelector((state) => state.users)
+    const [loading, setLoading] = useState(false)
     const [data = [], setData] = useState([])
     const [openTab, setOpenTab] = useState(1);
     const [showNewRequestModal, setShowNewRequestModal] = useState(false)
     const dispatch = useDispatch()
 
     const GetData = async () => {
+        setLoading(true)
         try {
             const response = await GetAllRequestsByUser()
             if (response.success) {
                 const NewSenderData = response.data.filter((item) => item.Sender._id === user._id)
                 const NewReceiverData = response.data.filter((item) => item.Receiver._id === user._id)
                 setData({ SentData: NewSenderData, ReceivedData: NewReceiverData })
+                setLoading(false)
             }
         } catch (error) {
+            setLoading(false)
             toast.error(error.message, { duration: 4000, position: 'top-right' })
         }
     }
@@ -33,27 +38,32 @@ const Requests = () => {
 
 
     const UpdateStatus = async (items, Status) => {
+        setLoading(true)
         try {
             if (Status === "Success" && items.Amount > user.Balance) {
+                setLoading(false)
                 toast.error("Insuffcient funds", { duration: 4000, position: 'top-right' })
             } else {
                 const response = await UpdateRequestStatus({ ...items, Status })
                 if (response.success) {
+                    setLoading(false)
                     toast.success(response.message, { duration: 2000, position: 'top-right' })
                     GetData()
                     dispatch(setReloadUser(true))
                 } else {
+                    setLoading(false)
                     toast.error(error.message, { duration: 4000, position: 'top-right' })
                 }
             }
         } catch (error) {
+            setLoading(false)
             toast.error(error.message, { duration: 4000, position: 'top-right' })
         }
     }
 
     return (
-        <div className='flex flex-col'>
-            <div className="container p-6 mx-auto">
+        <div className=''>
+            <div className="mx-auto flex flex-col container">
                 <PageTitle Title={"Requests"} />
                 <div>
                     <div className='flex gap-y-4 flex-col sm:flex-row justify-between my-5 items-center'>
@@ -197,6 +207,7 @@ const Requests = () => {
                     </div>
                 </div>
             </div>
+            {loading && <Loader />}
             {showNewRequestModal && <NewRequestModal showNewRequestModal={showNewRequestModal} setShowNewRequestModal={setShowNewRequestModal} ReloadData={GetData} />}
         </div>
     )

@@ -31,11 +31,11 @@ export const DashboardLayout = ({ children }) => {
                 <div
                     className={
                         activeMenu
-                            ? "h-full md:ml-72 w-full"
+                            ? "h-full xl:ml-72 w-full"
                             : "h-full w-full"
                     }
                 >
-                    <div className="w-full md:static navbar ">
+                    <div className="w-full xl:static navbar ">
                         <DashboardNavbar user={user} />
                     </div>
                     <div className="z-40 p-4 onboard">

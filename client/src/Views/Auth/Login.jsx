@@ -3,10 +3,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast';
 
 import AuthLayout from "../../Layouts/Auth.Layout.jsx"
-import { LoginUser } from '../../APIs/Users.api.js'
+import { LoginUser } from '../../APIs/Users.Api.js'
+import { Loader } from "../../Components/Index.js"
 
 const Login = () => {
     const [email, setEmail] = useState("")
+    const [loading, setLoading] = useState(false)
     const [password, setPassword] = useState("")
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -20,6 +22,7 @@ const Login = () => {
     }
 
     const SubmitValues = async () => {
+        setLoading(true)
         try {
             if (!email || !password) {
                 toast.error("Please fill in all the required fields.", { duration: 4000, position: 'top-right' })
@@ -31,6 +34,7 @@ const Login = () => {
             })
 
             if (response.success) {
+                setLoading(false)
                 localStorage.setItem("Token", response.data)
                 toast.success(response.message, { duration: 2000, position: 'top-right' })
                 navigate("/Dashboard")
@@ -40,9 +44,11 @@ const Login = () => {
                 // }
                 // nextPage()
             } else {
+                setLoading(false)
                 toast.error(response.message, { duration: 4000, position: 'top-right' })
             }
         } catch (error) {
+            setLoading(false)
             toast.error(error.message, { duration: 4000, position: 'top-right' })
         }
     }
@@ -130,6 +136,7 @@ const Login = () => {
                     </Link>
                 </div>
             </div>
+            {loading && <Loader />}
         </AuthLayout>
     )
 }

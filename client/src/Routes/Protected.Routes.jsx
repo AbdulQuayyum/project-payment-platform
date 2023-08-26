@@ -3,12 +3,14 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
 
-import { GetUserInformation } from '../APIs/Users.api'
-import { setUser, setReloadUser } from "../Redux/UsersSlice"
+import { GetUserInformation } from '../APIs/Users.Api'
+import { setUser, setReloadUser, setRemoveUser } from "../Redux/UsersSlice"
 import { DashboardLayout } from '../Layouts/Dashboard.Layout';
+import { Loader } from "../Components/Index"
 
 const ProtectedRoutes = (props) => {
     // const [userData, setUserData] = useState(null)
+    const [loading, setLoading] = useState(false)
     const { user, reloadUser } = useSelector((state) => state.users)
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -18,23 +20,34 @@ const ProtectedRoutes = (props) => {
     )
 
     const GetData = async () => {
+        setLoading(true)
         try {
             const response = await GetUserInformation()
             if (response.success) {
+                setLoading(false)
                 dispatch(setUser(response.data))
-            }
-            else if (response.message === "jwt malformed") {
+            } else if (response.message === "jwt malformed") {
+                // async function nextPage() {
+                //     await delay(2000)
+                //     window.location.reload()
+                // }
+                // nextPage()
+                window.location.reload()
+                setLoading(false)
+            } else {
+                setLoading(false)
+                toast.error(response.message, { duration: 4000, position: 'top-right' })
                 async function nextPage() {
                     await delay(2000)
-                    window.location.reload()
+                    localStorage.removeItem("Token")
+                    dispatch(setRemoveUser(true));
+                    navigate("/Login")
                 }
                 nextPage()
-            } else {
-                toast.error(response.message, { duration: 4000, position: 'top-right' })
-                navigate("/Login")
             }
             dispatch(setReloadUser(false))
         } catch (error) {
+            setLoading(false)
             toast.error(error.message, { duration: 4000, position: 'top-right' })
             navigate("/Login")
         }
@@ -57,7 +70,10 @@ const ProtectedRoutes = (props) => {
     }, [reloadUser])
 
     return user && (
-        <DashboardLayout>{children}</DashboardLayout>
+        <DashboardLayout>
+            {children}
+            {loading && <Loader />}
+        </DashboardLayout>
     )
 }
 
