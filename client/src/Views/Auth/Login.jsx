@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast';
 
 import AuthLayout from "../../Layouts/Auth.Layout.jsx"
-import { LoginUser } from '../../APIs/Users.api.js'
+import { LoginUser } from '../../APIs/Users.Api.js'
 import { Loader } from "../../Components/Index.js"
 
 const Login = () => {

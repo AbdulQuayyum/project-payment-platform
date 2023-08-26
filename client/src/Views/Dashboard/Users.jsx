@@ -5,10 +5,12 @@ import Select from 'react-select'
 import { CgSearch } from "react-icons/cg"
 
 import { PageTitle } from '../../Components/Index';
+import { Loader } from "../../Components/Index"
 import { GetAllUsers, UpdateUserVerificationStatus } from "../../APIs/Users.Api"
 
 const Users = () => {
     const [users, setUsers] = useState([])
+    const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
     const options = [
         { value: 'Suspended', label: 'Suspended' },
@@ -32,15 +34,19 @@ const Users = () => {
     };
 
     const GetData = async () => {
+        setLoading(true)
         try {
             const response = await GetAllUsers()
             if (response.success) {
+                setLoading(false)
                 setUsers(response.data)
             } else {
+                setLoading(false)
                 toast.error(error.message, { duration: 4000, position: 'top-right' })
             }
 
         } catch (error) {
+            setLoading(false)
             toast.error(error.message, { duration: 4000, position: 'top-right' })
         }
     }
@@ -50,15 +56,19 @@ const Users = () => {
     }, [])
 
     const UpdateStatus = async (items, IsVerified) => {
+        setLoading(true)
         try {
             const response = await UpdateUserVerificationStatus({ SelectedUser: items._id, IsVerified })
             if (response.success) {
+                setLoading(false)
                 toast.success(response.message, { duration: 2000, position: 'top-right' })
                 GetData()
             } else {
+                setLoading(false)
                 toast.error(error.message, { duration: 4000, position: 'top-right' })
             }
         } catch (error) {
+            setLoading(false)
             toast.error(error.message, { duration: 4000, position: 'top-right' })
         }
     }
@@ -147,6 +157,7 @@ const Users = () => {
                     </div>
                 </div>
             </div>
+            {loading && <Loader />}
         </div>
     )
 }

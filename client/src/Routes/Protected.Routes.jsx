@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
 
-import { GetUserInformation } from '../APIs/Users.api'
+import { GetUserInformation } from '../APIs/Users.Api'
 import { setUser, setReloadUser, setRemoveUser } from "../Redux/UsersSlice"
 import { DashboardLayout } from '../Layouts/Dashboard.Layout';
 import { Loader } from "../Components/Index"
