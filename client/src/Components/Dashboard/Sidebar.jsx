@@ -20,7 +20,7 @@ const Sidebar = ({ user }) => {
   )
 
   const HandleCloseSideBar = () => {
-    if (activeMenu !== undefined && screenSize <= 900) {
+    if (activeMenu !== undefined && screenSize <= 1280) {
       setActiveMenu(false);
     }
   };
@@ -57,7 +57,7 @@ const Sidebar = ({ user }) => {
               <button
                 type="button"
                 onClick={() => setActiveMenu(!activeMenu)}
-                className="items-center block p-3 text-xl rounded-full hover:bg-light-gray md:hidden"
+                className="items-center block p-3 text-xl rounded-full hover:bg-light-gray"
               >
                 <TbArrowBigLeftLines size={24} />
               </button>

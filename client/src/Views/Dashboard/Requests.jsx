@@ -62,8 +62,8 @@ const Requests = () => {
     }
 
     return (
-        <div className='flex flex-col'>
-            <div className="container p-6 mx-auto">
+        <div className=''>
+            <div className="mx-auto flex flex-col container">
                 <PageTitle Title={"Requests"} />
                 <div>
                     <div className='flex gap-y-4 flex-col sm:flex-row justify-between my-5 items-center'>

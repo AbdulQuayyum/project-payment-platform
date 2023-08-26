@@ -37,7 +37,7 @@ const DashboardNavbar = ({ user }) => {
     }, []);
 
     useEffect(() => {
-        if (screenSize <= 900) {
+        if (screenSize <= 1280) {
             setActiveMenu(false);
         } else {
             setActiveMenu(true);
@@ -50,7 +50,7 @@ const DashboardNavbar = ({ user }) => {
             <NavButton
                 title="Menu"
                 customFunc={HandleActiveMenu}
-                icon={<HiMenuAlt2 className="mt-1 dark:text-white lg:hidden" />}
+                icon={<HiMenuAlt2 className="mt-1 dark:text-white" />}
             />
             <div className="flex items-center">
                 <NavButton
