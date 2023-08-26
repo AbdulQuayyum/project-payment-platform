@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
 
 import { GetUserInformation } from '../APIs/Users.api'
-import { setUser, setReloadUser } from "../Redux/UsersSlice"
+import { setUser, setReloadUser, setRemoveUser } from "../Redux/UsersSlice"
 import { DashboardLayout } from '../Layouts/Dashboard.Layout';
 
 const ProtectedRoutes = (props) => {
@@ -22,16 +22,22 @@ const ProtectedRoutes = (props) => {
             const response = await GetUserInformation()
             if (response.success) {
                 dispatch(setUser(response.data))
-            }
-            else if (response.message === "jwt malformed") {
-                async function nextPage() {
-                    await delay(2000)
-                    window.location.reload()
-                }
-                nextPage()
+            } else if (response.message === "jwt malformed") {
+                // async function nextPage() {
+                //     await delay(2000)
+                //     window.location.reload()
+                // }
+                // nextPage()
+                window.location.reload()
             } else {
                 toast.error(response.message, { duration: 4000, position: 'top-right' })
-                navigate("/Login")
+                async function nextPage() {
+                    await delay(2000)
+                    localStorage.removeItem("Token")
+                    dispatch(setRemoveUser(true));
+                    navigate("/Login")
+                }
+                nextPage()
             }
             dispatch(setReloadUser(false))
         } catch (error) {
