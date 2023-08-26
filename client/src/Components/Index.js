@@ -13,6 +13,7 @@ import Button from "./Dashboard/NavbarInfo/Button";
 import Notification from "./Dashboard/NavbarInfo/Notification";
 import UserProfile from "./Dashboard/NavbarInfo/UserProfile";
 
+import Loader from "./Loader";
 
 export { 
     Footer, 
@@ -26,4 +27,5 @@ export {
     Button, 
     Notification, 
     UserProfile, 
+    Loader
 }
