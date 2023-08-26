@@ -4,7 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import { TbArrowBigLeftLines, TbListDetails } from "react-icons/tb"
 import { RxDashboard } from "react-icons/rx"
 import { PiUserList, PiArrowsLeftRightBold } from "react-icons/pi"
-import { FaRegUser } from "react-icons/fa"
+import { IoSettingsOutline } from "react-icons/io5"
 import { CgLogOut } from "react-icons/cg"
 
 import Logo from "/logo.png"
@@ -45,6 +45,7 @@ const Sidebar = ({ user }) => {
     <div className="flex flex-col min-h-screen py-2 sm:py-4 w-72 dark:border-gray-600">
       {activeMenu && (
         <>
+          <></>
           <div className="flex items-center justify-between">
             <Link
               to="/"
@@ -102,12 +103,12 @@ const Sidebar = ({ user }) => {
                   <span className="py-2 mx-4 text-lg font-semibold">Requests</span>
                 </NavLink>
                 <NavLink
-                  to="/D"
+                  to="/Settings"
                   onClick={HandleCloseSideBar}
                   className={({ isActive }) => (isActive ? activeLink : normalLink)}
                 >
-                  <FaRegUser size={22} className="ml-4" />
-                  <span className="py-2 mx-4 text-lg font-semibold">Profile</span>
+                  <IoSettingsOutline size={22} className="ml-4" />
+                  <span className="py-2 mx-4 text-lg font-semibold">Settings</span>
                 </NavLink>
               </div>
               <div className="mb-10 sm:mb-0">
