@@ -16,6 +16,7 @@ import UserProfile from "./Dashboard/NavbarInfo/UserProfile";
 import { AnalyticsWrapper } from "./Analytics";
 import About from "./About";
 import BackToTop from "./BackToTop";
+import CardDesign from "./CardDesign";
 import Header from "./Header";
 import Hero from "./Hero";
 import HomeFooter from "./HomeFooter";
