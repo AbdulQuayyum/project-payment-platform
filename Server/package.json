@@ -7,6 +7,9 @@
     "start": "node Server.js",
     "dev": "nodemon Server.js"
   },
+  "engines": {
+    "node": ">=14.20.1"
+  },
   "repository": "https://github.com/AbdulQuayyum/project-payment-platform/tree/Source/Server",
   "author": "Abdul-Quayyum",
   "license": "MIT",
