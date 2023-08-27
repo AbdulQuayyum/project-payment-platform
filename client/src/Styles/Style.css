@@ -90,6 +90,33 @@ body {
     visibility: visible;
 }
 
+/* footer */
+
+.footer-container {
+    color: #aaa;
+    text-align: center;
+    margin-top: 20px;
+    /* margin: 6px 18px; */
+    max-width: 1400px;
+    margin: auto;
+    width: 100%;
+    padding: 30px 10px;
+    font-weight: 700;
+    display: flex;
+    /* flex-wrap: wrap; */
+    /* flex-direction: column; */
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+
+}
+
+@media screen and (max-width:500px) {
+    .footer-container {
+        flex-direction: column;
+    }
+}
+
 /*=============== BREAKPOINTS ===============*/
 
 @media screen and (max-width: 576px) {
