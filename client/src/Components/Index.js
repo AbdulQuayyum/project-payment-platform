@@ -14,6 +14,7 @@ import Notification from "./Dashboard/NavbarInfo/Notification";
 import UserProfile from "./Dashboard/NavbarInfo/UserProfile";
 
 import { AnalyticsWrapper } from "./Analytics";
+import BackToTop from "./BackToTop";
 import Header from "./Header";
 import HomeFooter from "./HomeFooter";
 import Loader from "./Loader";
@@ -31,6 +32,7 @@ export {
     Notification,
     UserProfile,
     AnalyticsWrapper,
+    BackToTop,
     Header,
     HomeFooter,
     Loader

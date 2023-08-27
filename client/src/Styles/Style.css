@@ -24,6 +24,19 @@ body {
     box-shadow: rgb(113 122 131 / 11%) 0px 7px 30px 0px;
 }
 
+.layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.main-container {
+    max-width: 1400px;
+    margin: auto;
+    width: 100%;
+}
+
 .nav-item,
 .navbar {
     z-index: 10000;
@@ -114,6 +127,58 @@ body {
 @media screen and (max-width:500px) {
     .footer-container {
         flex-direction: column;
+    }
+}
+
+.back-to-top {
+    position: fixed;
+    right: 2.5rem;
+    bottom: -20%;
+    background-color: var(--title-color);
+    opacity: 0.8;
+    padding: 0.3rem 0.5rem;
+    border-radius: 0.4rem;
+    z-index: var(--z-tooltip);
+    transition: .4s;
+}
+
+.back-to-top-icon {
+    font-size: 1.5rem;
+    color: var(--body-color);
+}
+
+.back-to-top:hover {
+    background-color: var(--title-color-dark);
+}
+
+.show-back-to-top {
+    bottom: 3rem;
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For large devices */
+@media screen and (max-width: 992px) {
+    .back-to-top {
+        right: 1.5rem;
+        padding: 0.25rem 0.4rem;
+    }
+
+    .back-to-top-icon {
+        font-size: 1.25rem;
+    }
+}
+
+/* For medium devices */
+@media screen and (max-width: 768px) {
+    .show-back-to-top {
+        bottom: 4rem;
+    }
+}
+
+/* For small devices */
+@media screen and (max-width: 350px) {
+    .back-to-top {
+        right: 1rem;
     }
 }
 

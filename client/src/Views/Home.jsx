@@ -1,12 +1,12 @@
 import React from 'react'
 
-import AuthLayout from "../Layouts/Auth.Layout"
+import HomeLayout from "../Layouts/Home.Layout"
 
 const Home = () => {
     return (
-        <AuthLayout>
+        <HomeLayout>
             Home
-        </AuthLayout>
+        </HomeLayout>
     )
 }
 
