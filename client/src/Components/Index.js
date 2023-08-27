@@ -13,19 +13,21 @@ import Button from "./Dashboard/NavbarInfo/Button";
 import Notification from "./Dashboard/NavbarInfo/Notification";
 import UserProfile from "./Dashboard/NavbarInfo/UserProfile";
 
+import { AnalyticsWrapper } from "./Analytics";
 import Loader from "./Loader";
 
-export { 
-    Footer, 
-    Navbar, 
-    DashboardNavbar, 
-    Sidebar, 
-    PageTitle, 
-    DepositModal, 
+export {
+    Footer,
+    Navbar,
+    DashboardNavbar,
+    Sidebar,
+    PageTitle,
+    DepositModal,
     NewRequestModal,
     TransferFundsModal,
-    Button, 
-    Notification, 
-    UserProfile, 
+    Button,
+    Notification,
+    UserProfile,
+    AnalyticsWrapper,
     Loader
 }
