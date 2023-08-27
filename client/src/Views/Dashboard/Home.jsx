@@ -42,34 +42,7 @@ const DashboardHome = () => {
           </div>
           <div className="flex-1 p-4">
             <div className='flex flex-col h-full p-6 bg-white border border-gray-200 rounded-lg shadow gap-y-4'>
-              <div className='flex flex-col justify-between min-[500px]:flex-row'>
-                <span className='text-[#aaa] font-extrabold'>First Name:</span>
-                <span className='text-[#aaa]'>{user?.FirstName}</span>
-              </div>
-              <div className='flex flex-col justify-between min-[500px]:flex-row'>
-                <span className='text-[#aaa] font-extrabold'>Last Name:</span>
-                <span className='text-[#aaa]'>{user?.LastName}</span>
-              </div>
-              <div className='flex flex-col justify-between min-[500px]:flex-row'>
-                <span className='text-[#aaa] font-extrabold'>Email Address:</span>
-                <span className='text-[#aaa]'>{user?.Email}</span>
-              </div>
-              <div className='flex flex-col justify-between min-[500px]:flex-row'>
-                <span className='text-[#aaa] font-extrabold'>User Country:</span>
-                <span className='text-[#aaa]'>{user?.Country}</span>
-              </div>
-              <div className='flex flex-col justify-between min-[500px]:flex-row'>
-                <span className='text-[#aaa] font-extrabold'>Phone Number:</span>
-                <span className='text-[#aaa]'>{user?.PhoneNumber}</span>
-              </div>
-              <div className='flex flex-col justify-between min-[500px]:flex-row'>
-                <span className='text-[#aaa] font-extrabold'>Identity Type:</span>
-                <span className='text-[#aaa]'>{user?.IdentificationType}</span>
-              </div>
-              <div className='flex flex-col justify-between min-[500px]:flex-row'>
-                <span className='text-[#aaa] font-extrabold'>Identification Number:</span>
-                <span className='text-[#aaa]'>{user?.IdentificationNumber}</span>
-              </div>
+              <span>This is where the QR Code would be...</span>
             </div>
           </div>
         </div>
