@@ -6,7 +6,7 @@ const HomeFooter = () => {
     return (
         <div className='footer-container'>
             <div>
-                <span className=" dark:text-[#fff]">{currentYear} &#169; Na Me, All rights reserved</span>
+                <span className=" dark:text-[#fff]">{currentYear} &#169; Abdul-Quayyum Alao, All rights reserved</span>
             </div>
             <div className='flex gap-6'>
                 <span className="cursor-pointer dark:text-[#fff]">Terms & Conditions</span>
