@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 import AuthLayout from '../../Layouts/Auth.Layout'
 import CountryRawData from "../../Data/Country.json"
 import IDRawData from "../../Data/IdType.json"
-import { RegisterUser } from '../../APIs/Users.api'
+import { RegisterUser } from '../../APIs/Users.Api'
 import { Loader } from "../../Components/Index.js"
 
 const Register = () => {
