@@ -1,11 +1,30 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
+import { useDispatch } from "react-redux"
 import { TbX } from 'react-icons/tb';
 import { FaRegUser } from "react-icons/fa"
+import { CgLogOut } from "react-icons/cg"
 
 import Button from './Button';
+import { setUser, setRemoveUser } from '../../../Redux/UsersSlice';
 import { UserProfileData } from '../../../Data/Dummy';
 
 const UserProfile = ({ user }) => {
+    const dispatch = useDispatch()
+    const delay = ms => new Promise(
+        resolve => setTimeout(resolve, ms)
+    )
+
+    const HandleLogout = () => {
+        localStorage.removeItem("Token")
+        dispatch(setRemoveUser(true));
+        setUser(null)
+        async function nextPage() {
+            await delay(2000)
+            window.location.reload()
+        }
+        nextPage()
+    }
 
     return (
         <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96">
@@ -27,30 +46,30 @@ const UserProfile = ({ user }) => {
                 </div>
             </div>
             <div>
-                {UserProfileData.map((item, index) => (
-                    <div key={index} className="flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]">
-                        <button
-                            type="button"
-                            style={{ color: item?.iconColor, backgroundColor: item?.iconBg }}
-                            className="p-3 text-xl rounded-lg hover:bg-light-gray"
-                        >
-                            {item.icon}
-                        </button>
+                <Link to="/Settings">
+                    {UserProfileData.map((item, index) => (
+                        <div key={index} className="flex gap-5 items-center border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]">
+                            <button
+                                type="button"
+                                style={{ color: item?.iconColor, backgroundColor: item?.iconBg }}
+                                className="p-3 text-xl rounded-lg hover:bg-light-gray"
+                            >
+                                {item.icon()}
+                            </button>
 
-                        <div>
-                            <p className="font-semibold dark:text-gray-200 ">{item?.title}</p>
+                            <div>
+                                <p className="font-semibold dark:text-gray-200 ">{item?.title}</p>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </Link>
             </div>
-            <div className="mt-5">
-                <Button
-                    color="#aaa"
-                    text="Logout"
-                    borderRadius="10px"
-                    width="full"
-                />
-            </div>
+            <button
+                onClick={HandleLogout}
+                className="mt-5 flex px-5 items-center text-[#aaa] hover:text-black gap-x-4">
+                < CgLogOut size={22} />
+                <span className='text-lg font-semibold'>Logout</span>
+            </button>
         </div>
 
     );

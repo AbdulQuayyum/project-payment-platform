@@ -112,14 +112,13 @@ const Sidebar = ({ user }) => {
                 </NavLink>
               </div>
               <div className="mb-10 sm:mb-0">
-                <NavLink
-                  to="/Login"
+                <button
                   onClick={HandleLogout}
-                  className={({ isActive }) => (isActive ? activeLink : normalLink)}
+                  className="flex items-center px-4 py-2 my-2 text-gray-400 transition-all duration-500 transform rounded-md dark:text-gray-400 hover:bg-[$F4F4F5] hover:text-black dark:hover:bg-gray-700 dark:hover:text-gray-200"
                 >
                   <CgLogOut size={22} className="ml-4" />
                   <span className="py-2 mx-4 text-lg font-semibold">Logout</span>
-                </NavLink>
+                </button>
               </div>
             </div>
           </div>

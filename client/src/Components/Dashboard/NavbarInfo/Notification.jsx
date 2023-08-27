@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { TbX } from 'react-icons/tb';
 
 import { NotficationData } from '../../../Data/Dummy';
@@ -18,15 +19,17 @@ const Notification = () => {
             <div className="mt-5 ">
                 {NotficationData?.map((item, index) => (
                     <div key={index} className="flex items-center gap-5 p-3 leading-8 border-b-1 border-color">
-                        {item.image}
+                        {item.image()} {/* Call the function to render the JSX component */}
                         <div>
                             <p className="font-semibold dark:text-gray-200">{item.message}</p>
                             <p className="text-base text-gray-500 dark:text-gray-400"> {item.desc} </p>
                         </div>
                     </div>
                 ))}
-                <div className="mt-5">
-                    <Button color="#aaa" text="See all notifications" borderRadius="10px" width="full" />
+                <div className="mt-5 justify-center flex">
+                    <Link to="/Settings">
+                        <span className='text-[#aaa] hover:text-black font-semibold'>See all Notifications</span>
+                    </Link>
                 </div>
             </div>
         </div>
