@@ -16,7 +16,7 @@ const DashboardHome = () => {
         <div className='my-4'>
           <span className='font-extrabold text-2xl md:text-[40px] text-[#aaa]'>Welcome back, {user?.FirstName}</span>
         </div>
-        <div className="flex flex-col items-stretch -mx-4 lg:flex-row">
+        <div className="flex flex-col items-stretch lg:flex-row">
           <div className="flex-1 p-4">
             <div className='flex flex-col h-full p-6 bg-white border border-gray-200 rounded-lg shadow gap-y-4'>
               <div className='flex flex-col justify-between min-[500px]:flex-row'>
