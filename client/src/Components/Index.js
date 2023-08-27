@@ -13,19 +13,32 @@ import Button from "./Dashboard/NavbarInfo/Button";
 import Notification from "./Dashboard/NavbarInfo/Notification";
 import UserProfile from "./Dashboard/NavbarInfo/UserProfile";
 
+import { AnalyticsWrapper } from "./Analytics";
+import About from "./About";
+import BackToTop from "./BackToTop";
+import CardDesign from "./CardDesign";
+import Header from "./Header";
+import Hero from "./Hero";
+import HomeFooter from "./HomeFooter";
 import Loader from "./Loader";
 
-export { 
-    Footer, 
-    Navbar, 
-    DashboardNavbar, 
-    Sidebar, 
-    PageTitle, 
-    DepositModal, 
+export {
+    Footer,
+    Navbar,
+    DashboardNavbar,
+    Sidebar,
+    PageTitle,
+    DepositModal,
     NewRequestModal,
     TransferFundsModal,
-    Button, 
-    Notification, 
-    UserProfile, 
+    Button,
+    Notification,
+    UserProfile,
+    AnalyticsWrapper,
+    About,
+    BackToTop,
+    Header,
+    HomeFooter,
+    Hero,
     Loader
 }

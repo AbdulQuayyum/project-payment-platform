@@ -19,14 +19,121 @@ body {
     background-color: transparent;
 }
 
+@keyframes hero-img-animate {
+    0% {
+        border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+    }
+
+    50% {
+        border-radius: 30% 60% 70% 40%/50% 60% 30% 60%;
+    }
+
+    100% {
+        border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+    }
+}
+
 .sidebar {
     background-color: white;
     box-shadow: rgb(113 122 131 / 11%) 0px 7px 30px 0px;
 }
 
+.layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.main-container {
+    max-width: 1400px;
+    margin: auto;
+    width: 100%;
+}
+
 .nav-item,
 .navbar {
     z-index: 10000;
+}
+
+.navbar-container {
+    max-width: 1400px;
+    margin: auto;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    z-index: 99999999;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.navbar-menu-container {
+    display: flex;
+    row-gap: 10px;
+    justify-content: flex-end;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 2rem;
+    position: absolute;
+    right: 0;
+    top: 60px;
+    margin-top: 1rem;
+    min-width: 210px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    z-index: 99999999999;
+}
+
+/* Hero Section */
+.hero-img {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    box-shadow: inset 0 0 0 9px rgb(53 67 88 / 30%);
+    transition: opacity 1000ms linear 0s;
+    /* order: 1; */
+    justify-self: center;
+    width: 400px;
+    height: 400px;
+    animation: hero-img-animate 8s ease-in-out infinite 1s;
+}
+
+.hover-icon {
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.custom-hover:hover .hover-icon {
+    transform: translateX(00.25rem);
+}
+
+@media screen and (max-width: 992px) {
+    .hero-img {
+        height: 300px;
+        width: 300px;
+        box-shadow: inset 0 0 0 8px rgb(53 67 88 / 30%);
+    }
+}
+
+/* For medium devices */
+@media screen and (max-width: 768px) {
+    .hero-img {
+        box-shadow: inset 0 0 0 6px rgb(53 67 88 / 30%);
+    }
+}
+
+/* For small devices */
+@media screen and (max-width: 350px) {
+    .hero-img {
+        height: 240px;
+        width: 240px;
+    }
 }
 
 .onboard {
@@ -88,6 +195,85 @@ body {
 .active-request-modal {
     opacity: 1;
     visibility: visible;
+}
+
+/* footer */
+
+.footer-container {
+    color: #aaa;
+    text-align: center;
+    margin-top: 20px;
+    /* margin: 6px 18px; */
+    max-width: 1400px;
+    margin: auto;
+    width: 100%;
+    padding: 30px 10px;
+    font-weight: 700;
+    display: flex;
+    /* flex-wrap: wrap; */
+    /* flex-direction: column; */
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+
+}
+
+@media screen and (max-width:500px) {
+    .footer-container {
+        flex-direction: column;
+    }
+}
+
+.back-to-top {
+    position: fixed;
+    right: 2.5rem;
+    bottom: -20%;
+    background-color: var(--title-color);
+    opacity: 0.8;
+    padding: 0.3rem 0.5rem;
+    border-radius: 0.4rem;
+    z-index: var(--z-tooltip);
+    transition: .4s;
+}
+
+.back-to-top-icon {
+    font-size: 1.5rem;
+    color: var(--body-color);
+}
+
+.back-to-top:hover {
+    background-color: var(--title-color-dark);
+}
+
+.show-back-to-top {
+    bottom: 3rem;
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For large devices */
+@media screen and (max-width: 992px) {
+    .back-to-top {
+        right: 1.5rem;
+        padding: 0.25rem 0.4rem;
+    }
+
+    .back-to-top-icon {
+        font-size: 1.25rem;
+    }
+}
+
+/* For medium devices */
+@media screen and (max-width: 768px) {
+    .show-back-to-top {
+        bottom: 4rem;
+    }
+}
+
+/* For small devices */
+@media screen and (max-width: 350px) {
+    .back-to-top {
+        right: 1rem;
+    }
 }
 
 /*=============== BREAKPOINTS ===============*/
