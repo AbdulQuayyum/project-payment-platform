@@ -19,6 +19,20 @@ body {
     background-color: transparent;
 }
 
+@keyframes hero-img-animate {
+    0% {
+        border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+    }
+
+    50% {
+        border-radius: 30% 60% 70% 40%/50% 60% 30% 60%;
+    }
+
+    100% {
+        border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+    }
+}
+
 .sidebar {
     background-color: white;
     box-shadow: rgb(113 122 131 / 11%) 0px 7px 30px 0px;
@@ -76,24 +90,51 @@ body {
     z-index: 99999999999;
 }
 
-.info-menu-container {
-    display: flex;
-    row-gap: 10px;
-    background-color: #fff;
-    justify-content: flex-end;
-    align-items: flex-start;
-    flex-direction: column;
-    padding: 2rem;
-    position: absolute;
-    /* right: 0; */
-    top: 60px;
-    margin-top: 1rem;
-    min-width: 210px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-    z-index: 99999999999;
+/* Hero Section */
+.hero-img {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    box-shadow: inset 0 0 0 9px rgb(53 67 88 / 30%);
+    transition: opacity 1000ms linear 0s;
+    /* order: 1; */
+    justify-self: center;
+    width: 400px;
+    height: 400px;
+    animation: hero-img-animate 8s ease-in-out infinite 1s;
 }
 
+.hover-icon {
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.custom-hover:hover .hover-icon {
+    transform: translateX(00.25rem);
+}
+
+@media screen and (max-width: 992px) {
+    .hero-img {
+        height: 300px;
+        width: 300px;
+        box-shadow: inset 0 0 0 8px rgb(53 67 88 / 30%);
+    }
+}
+
+/* For medium devices */
+@media screen and (max-width: 768px) {
+    .hero-img {
+        box-shadow: inset 0 0 0 6px rgb(53 67 88 / 30%);
+    }
+}
+
+/* For small devices */
+@media screen and (max-width: 350px) {
+    .hero-img {
+        height: 240px;
+        width: 240px;
+    }
+}
 
 .onboard {
     min-height: calc(100vh - 244px);
