@@ -2,7 +2,7 @@ import React from 'react'
 import { Routes, Route } from "react-router-dom";
 
 import { ProtectedRoutes, PublicRoutes } from "./Index"
-import { Home, Login, Register, DashboardHome, Requests, Transactions, Users } from '../Views/Index';
+import { Home, Login, Register, DashboardHome, Requests, Settings, Transactions, Users } from '../Views/Index';
 
 const MainRoutes = () => {
     return (
@@ -12,6 +12,7 @@ const MainRoutes = () => {
             <Route path='/Register' element={<PublicRoutes><Register /></PublicRoutes>} />
             <Route path='/Dashboard' element={<ProtectedRoutes><DashboardHome /></ProtectedRoutes>} />
             <Route path='/Requests' element={<ProtectedRoutes><Requests /></ProtectedRoutes>} />
+            <Route path='/Settings' element={<ProtectedRoutes><Settings /></ProtectedRoutes>} />
             <Route path='/Transactions' element={<ProtectedRoutes><Transactions /></ProtectedRoutes>} />
             <Route path='/Users' element={<ProtectedRoutes><Users /></ProtectedRoutes>} />
         </Routes>
